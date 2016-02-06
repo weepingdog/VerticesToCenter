@@ -20,7 +20,7 @@ namespace VerticesToCenter
 
         protected override void OnUpdate()
         {
-            Enabled = ArcMap.Application != null;         
+            Enabled = (ArcMap.Application != null&&GlobeStatus.IsEditing);         
         }
 
         protected override void OnActivate()
