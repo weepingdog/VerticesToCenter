@@ -44,8 +44,8 @@ namespace VerticesToCenter
             //
             //  TODO: Sample code showing how to access button host
             //
-            //FormOptionVerticesToCenter formVCOption = new FormOptionVerticesToCenter();
-            //formVCOption.Show();
+            FormOptionVerticesToCenter formVCOption = new FormOptionVerticesToCenter();
+            formVCOption.Show();
         }
         protected override void OnUpdate()
         {
