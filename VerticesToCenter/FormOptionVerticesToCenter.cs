@@ -21,7 +21,7 @@ namespace VerticesToCenter
             {
                 bool isChecked = GlobeStatus.CheckedPolyLines.Contains(featureLayer);
                 string name = FunctionCommon.GetNameFromLayer(featureLayer);
-                checkedListBox_EditablePolyLineNames.Items.Add(name);
+                checkedListBox_EditablePolyLineNames.Items.Add(name, isChecked);
             }
         }
 
