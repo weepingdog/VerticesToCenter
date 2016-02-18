@@ -9,15 +9,17 @@ namespace VerticesToCenter
 {
     public static class FunctionCommon
     {
-        public static string GetNameFromLayer(IFeatureLayer featureLayer)
+        public static string GetNameFromFeatureLayer(IFeatureLayer featureLayer)
         {
+            //Mark 手动修改层名可能会出现问题
             return featureLayer.Name;
         }
-        public static IFeatureLayer GetFeatureLayerFromName(string featureClassName,PolyLinesVTC polylineVTC)
+
+        public static IFeatureLayer GetFeatureLayerWithName(string name, IList<IFeatureLayer> featureLayerList)
         {
             IFeatureLayer pFeatureLayer = null;
-            foreach (IFeatureLayer featureLayer in polylineVTC.FeatureLayerList)
-                if (featureClassName == FunctionCommon.GetNameFromLayer(featureLayer))
+            foreach (IFeatureLayer featureLayer in featureLayerList)
+                if (name == FunctionCommon.GetNameFromFeatureLayer(featureLayer))
                     pFeatureLayer=featureLayer;
             return pFeatureLayer;
  
@@ -38,7 +40,13 @@ namespace VerticesToCenter
                 pLayer = pEnumLayer.Next();
             }
             return pEditablePolyLines;
-        }
-
+        }       
+    }
+    public enum EnumSelectMode
+    {
+        mostNearOne = 0,//最近点
+        onlyFirst = 1,//首点 ID=0-，实际的末点
+        onlyLast = 2, //末点，ID=N-1，实际的首点
+        bothFirstAndLast = 3,//两端的点
     }
 }

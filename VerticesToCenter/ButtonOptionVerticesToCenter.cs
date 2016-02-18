@@ -31,8 +31,8 @@ namespace VerticesToCenter
                 GlobeStatus.CheckedPolyLines.Clear();
                 GlobeStatus.EditablePolyLines.Clear();
                 IList<IFeatureLayer> FeatureLayerList = FunctionCommon.GetEditablePolyLines(GlobeStatus.Map);
-                GlobeStatus.EditablePolyLines.UpdateFeatureLayerList(FeatureLayerList);                
-                GlobeStatus.LastPathName = CurrentPathName;
+                GlobeStatus.EditablePolyLines.UpdateFeatureLayerList(FeatureLayerList);
+                GlobeStatus.UpdateLastPathName(CurrentPathName);
             }
             
         }

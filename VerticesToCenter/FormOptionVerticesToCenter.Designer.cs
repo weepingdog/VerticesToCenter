@@ -45,7 +45,7 @@
             this.label_RadiusChangeLimit = new System.Windows.Forms.Label();
             this.label_SelectMode = new System.Windows.Forms.Label();
             this.comboBox_SelectMode = new System.Windows.Forms.ComboBox();
-            this.checkBox_SnapToCenter = new System.Windows.Forms.CheckBox();
+            this.checkBox_CenterSnap = new System.Windows.Forms.CheckBox();
             this.button_OK = new System.Windows.Forms.Button();
             this.tabControl_Option.SuspendLayout();
             this.tabPage_SelectLayers.SuspendLayout();
@@ -127,7 +127,7 @@
             this.tabPage_Setting.Controls.Add(this.groupBox_Pixel);
             this.tabPage_Setting.Controls.Add(this.label_SelectMode);
             this.tabPage_Setting.Controls.Add(this.comboBox_SelectMode);
-            this.tabPage_Setting.Controls.Add(this.checkBox_SnapToCenter);
+            this.tabPage_Setting.Controls.Add(this.checkBox_CenterSnap);
             this.tabPage_Setting.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Setting.Name = "tabPage_Setting";
             this.tabPage_Setting.Padding = new System.Windows.Forms.Padding(3);
@@ -259,15 +259,15 @@
             this.comboBox_SelectMode.Size = new System.Drawing.Size(121, 20);
             this.comboBox_SelectMode.TabIndex = 1;
             // 
-            // checkBox_SnapToCenter
+            // checkBox_CenterSnap
             // 
-            this.checkBox_SnapToCenter.AutoSize = true;
-            this.checkBox_SnapToCenter.Location = new System.Drawing.Point(6, 6);
-            this.checkBox_SnapToCenter.Name = "checkBox_SnapToCenter";
-            this.checkBox_SnapToCenter.Size = new System.Drawing.Size(96, 16);
-            this.checkBox_SnapToCenter.TabIndex = 0;
-            this.checkBox_SnapToCenter.Text = "SnapToCenter";
-            this.checkBox_SnapToCenter.UseVisualStyleBackColor = true;
+            this.checkBox_CenterSnap.AutoSize = true;
+            this.checkBox_CenterSnap.Location = new System.Drawing.Point(6, 6);
+            this.checkBox_CenterSnap.Name = "checkBox_CenterSnap";
+            this.checkBox_CenterSnap.Size = new System.Drawing.Size(84, 16);
+            this.checkBox_CenterSnap.TabIndex = 0;
+            this.checkBox_CenterSnap.Text = "CenterSnap";
+            this.checkBox_CenterSnap.UseVisualStyleBackColor = true;
             // 
             // button_OK
             // 
@@ -311,7 +311,7 @@
         private System.Windows.Forms.TabControl tabControl_Option;
         private System.Windows.Forms.TabPage tabPage_SelectLayers;
         private System.Windows.Forms.TabPage tabPage_Setting;
-        private System.Windows.Forms.CheckBox checkBox_SnapToCenter;
+        private System.Windows.Forms.CheckBox checkBox_CenterSnap;
         private System.Windows.Forms.Label label_SelectMode;
         private System.Windows.Forms.ComboBox comboBox_SelectMode;
         private System.Windows.Forms.NumericUpDown numericUpDown_MaxFeaturesSelect;

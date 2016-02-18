@@ -46,7 +46,7 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        public static string LastPathName = "";        
+        
         public static bool IsEditing
         {
             get
@@ -60,7 +60,72 @@ namespace VerticesToCenter
                     return false;
             }
         }
+        
+        //LastPathName -- EditWorkspace
+        private static string m_LastPathName="";
+        public static string LastPathName
+        {
+            get { return m_LastPathName; }
+        }
+        public static void UpdateLastPathName(string name)
+        {
+            m_LastPathName = name;
+        }
+
+        //Option--SelectLayers
         public static PolyLinesVTC EditablePolyLines = new PolyLinesVTC();
         public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
+
+        //Option--Setting
+        private static bool m_CenterSnap = true;
+        public static bool CenterSnap
+        {
+            get { return m_CenterSnap; }
+        }
+        public static void UpdateCenterSnap(bool centerSnap)
+        {
+            m_CenterSnap = centerSnap; 
+        }
+
+        private static EnumSelectMode m_SelectMod = EnumSelectMode.mostNearOne;
+        public static EnumSelectMode SelectMode
+        {
+            get { return m_SelectMod; }
+        }
+        public static void UpdateSelectMode(EnumSelectMode selectMod)
+        {
+            m_SelectMod = selectMod;
+        }
+
+        private static int m_RadiusChangeLimit = 3;
+        public static int RadiusChangeLimit
+        {
+            get { return m_RadiusChangeLimit; }
+        }
+        public static void UpdateRadiusChangeLimit(int radiusChangeLimit)
+        {
+            m_RadiusChangeLimit = radiusChangeLimit;
+        }
+
+        private static int m_MaxRadius = 500;
+        public static int MaxRadius
+        {
+            get { return m_MaxRadius; }
+        }
+        public static void UpdateMaxRadius(int maxRadius)
+        {
+            m_MaxRadius = maxRadius;
+        }
+
+        private static int m_MaxFeaturesSelect = 10;
+        public static int MaxFeaturesSelect
+        {
+            get { return m_MaxFeaturesSelect; }
+        }
+        public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
+        {
+            m_MaxFeaturesSelect=maxFeaturesSelect;
+        }
     }
+
 }

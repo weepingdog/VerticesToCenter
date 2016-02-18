@@ -26,7 +26,7 @@ namespace VerticesToCenter
             foreach (IFeatureLayer featureLayer in featureLayerList)
             {
                 bool isChecked = GlobeStatus.CheckedPolyLines.Contains(featureLayer);
-                string name = FunctionCommon.GetNameFromLayer(featureLayer);
+                string name = FunctionCommon.GetNameFromFeatureLayer(featureLayer);
                 checkedListBox_EditablePolyLines.Items.Add(name, isChecked);
             } 
         }
@@ -75,7 +75,7 @@ namespace VerticesToCenter
                 bool currentIfChecked = checkedListBox_EditablePolyLines.GetItemChecked(currentIndex);
                 //string currentItemName = checkedListBox_EditablePolyLineNames.GetItemText(currentIndex);
                 string currentItemName = checkedListBox_EditablePolyLines.Items[currentIndex].ToString();
-                IFeatureLayer pFeatureLayer = FunctionCommon.GetFeatureLayerFromName(currentItemName, GlobeStatus.EditablePolyLines);
+                IFeatureLayer pFeatureLayer = FunctionCommon.GetFeatureLayerWithName(currentItemName, GlobeStatus.EditablePolyLines.FeatureLayerList);
                 if (currentIfChecked && !GlobeStatus.CheckedPolyLines.Contains(pFeatureLayer))
                 {
                     GlobeStatus.CheckedPolyLines.Add(pFeatureLayer);

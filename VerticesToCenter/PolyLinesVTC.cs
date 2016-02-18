@@ -6,9 +6,15 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geodatabase;
 namespace VerticesToCenter
 {
+    //public class PolyLinesVTC:IList<IFeatureLayer>
     public class PolyLinesVTC
     {
         private IList<IFeatureLayer> m_FeatureLayerList;
+        public IList<IFeatureLayer> FeatureLayerList
+        {
+            get { return m_FeatureLayerList; }
+        }
+
         public PolyLinesVTC()
         {
             m_FeatureLayerList = new List<IFeatureLayer>(); 
@@ -17,16 +23,7 @@ namespace VerticesToCenter
         {
             m_FeatureLayerList = featureLayerList;
         }
-        public IList<IFeatureLayer> FeatureLayerList
-        {
-            get { return m_FeatureLayerList; }
-        }
-        public void UpdateFeatureLayerList(IList<IFeatureLayer> featureLayerList)
-        {
-            this.Clear();
-            foreach (IFeatureLayer featureLayer in featureLayerList)
-                this.Add(featureLayer);
-        }
+
         public int Count
         {
             get { return m_FeatureLayerList.Count; }
@@ -36,8 +33,14 @@ namespace VerticesToCenter
             if (m_FeatureLayerList.Contains(featureLayer))
                 return;
             else
-                m_FeatureLayerList.Add(featureLayer); 
+                m_FeatureLayerList.Add(featureLayer);
         }
+        public void UpdateFeatureLayerList(IList<IFeatureLayer> featureLayerList)
+        {
+            this.Clear();
+            foreach (IFeatureLayer featureLayer in featureLayerList)
+                this.Add(featureLayer);
+        }        
         public void Remove(IFeatureLayer featureLayer)
         {
             if (m_FeatureLayerList.Contains(featureLayer))
@@ -47,6 +50,7 @@ namespace VerticesToCenter
         {
             m_FeatureLayerList.Clear();
         }
+
         public bool Contains(IFeatureLayer featureLayer)
         {
             return m_FeatureLayerList.Contains(featureLayer);
@@ -55,8 +59,8 @@ namespace VerticesToCenter
         {
             bool b_Contain = false;
             foreach (IFeatureLayer pFeatureLayer in m_FeatureLayerList)
-            { 
-                string pFeatureClassName = FunctionCommon.GetNameFromLayer(pFeatureLayer);
+            {
+                string pFeatureClassName = FunctionCommon.GetNameFromFeatureLayer(pFeatureLayer);
                 if (pFeatureClassName == name)
                 {
                     b_Contain = true;
@@ -69,7 +73,7 @@ namespace VerticesToCenter
         {
             IList<string> Names = new List<string>();
             foreach (IFeatureLayer featureLayer in m_FeatureLayerList)
-                Names.Add(FunctionCommon.GetNameFromLayer(featureLayer));
+                Names.Add(FunctionCommon.GetNameFromFeatureLayer(featureLayer));
             
             return Names; 
         }
