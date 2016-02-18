@@ -15,6 +15,10 @@ namespace VerticesToCenter
         public FormOptionVerticesToCenter()
         {
             InitializeComponent();
+            SelectLayersWhenFormStart();            
+        }
+        private void SelectLayersWhenFormStart()
+        {
             checkedListBox_EditablePolyLineNames.Items.Clear();
             IList<IFeatureLayer> featureLayerList = GlobeStatus.EditablePolyLines.FeatureLayerList;
             foreach (IFeatureLayer featureLayer in featureLayerList)
@@ -22,9 +26,10 @@ namespace VerticesToCenter
                 bool isChecked = GlobeStatus.CheckedPolyLines.Contains(featureLayer);
                 string name = FunctionCommon.GetNameFromLayer(featureLayer);
                 checkedListBox_EditablePolyLineNames.Items.Add(name, isChecked);
-            }
+            } 
         }
 
+        //Tabcontrol SelectLayers
         private void button_SelectAll_Click(object sender, EventArgs e)
         {
             int itemCount = checkedListBox_EditablePolyLineNames.Items.Count;
@@ -41,6 +46,11 @@ namespace VerticesToCenter
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
         {
+            SelectLayersWhenOnClosing();
+            
+        }
+        private void SelectLayersWhenOnClosing()
+        {
             int itemsCount = checkedListBox_EditablePolyLineNames.Items.Count;
             for (int currentIndex = 0; currentIndex < itemsCount; currentIndex++)
             {
@@ -54,7 +64,7 @@ namespace VerticesToCenter
                 }
                 if (!currentIfChecked && GlobeStatus.CheckedPolyLines.Contains(pFeatureLayer))
                     GlobeStatus.CheckedPolyLines.Remove(pFeatureLayer);
-            }
+            } 
         }
     }
 }
