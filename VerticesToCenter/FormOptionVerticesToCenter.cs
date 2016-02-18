@@ -15,46 +15,66 @@ namespace VerticesToCenter
         public FormOptionVerticesToCenter()
         {
             InitializeComponent();
-            SelectLayersWhenFormStart();            
+            SelectLayersTapControlWhenFormStart();
+            SettingTapControlWhenFormStart();
         }
-        private void SelectLayersWhenFormStart()
+
+        private void SelectLayersTapControlWhenFormStart()
         {
-            checkedListBox_EditablePolyLineNames.Items.Clear();
+            checkedListBox_EditablePolyLines.Items.Clear();
             IList<IFeatureLayer> featureLayerList = GlobeStatus.EditablePolyLines.FeatureLayerList;
             foreach (IFeatureLayer featureLayer in featureLayerList)
             {
                 bool isChecked = GlobeStatus.CheckedPolyLines.Contains(featureLayer);
                 string name = FunctionCommon.GetNameFromLayer(featureLayer);
-                checkedListBox_EditablePolyLineNames.Items.Add(name, isChecked);
+                checkedListBox_EditablePolyLines.Items.Add(name, isChecked);
             } 
+        }
+
+        private void SettingTapControlWhenFormStart()
+        {
+ 
         }
 
         private void button_SelectAll_Click(object sender, EventArgs e)
         {
-            int itemCount = checkedListBox_EditablePolyLineNames.Items.Count;
+            int itemCount = checkedListBox_EditablePolyLines.Items.Count;
             for (int i = 0; i < itemCount; i++)
-                checkedListBox_EditablePolyLineNames.SetItemChecked(i, true);
+                checkedListBox_EditablePolyLines.SetItemChecked(i, true);
         }
 
         private void button_SelectNone_Click(object sender, EventArgs e)
         {
-            int itemCount = checkedListBox_EditablePolyLineNames.Items.Count;
+            int itemCount = checkedListBox_EditablePolyLines.Items.Count;
             for (int i = 0; i < itemCount; i++)
-                checkedListBox_EditablePolyLineNames.SetItemChecked(i, false);
+                checkedListBox_EditablePolyLines.SetItemChecked(i, false);
+        }        
+
+        private void button_SelectLayers_Confirm_Click(object sender, EventArgs e)
+        {
+            SelectLayersTabControlWhenConfirm();
         }
 
-        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {           
-          
-        }
-        private void SelectLayersWhenOnClosing()
+        private void button_Setting_Confirm_Click(object sender, EventArgs e)
         {
-            int itemsCount = checkedListBox_EditablePolyLineNames.Items.Count;
+            SettingTabControlWhenConfirm();
+        }
+
+        private void button_OK_Click(object sender, EventArgs e)
+        {
+            SelectLayersTabControlWhenConfirm();
+            SettingTabControlWhenConfirm();
+            this.Close();
+        }
+
+        private void SelectLayersTabControlWhenConfirm()
+        {
+            int itemsCount = checkedListBox_EditablePolyLines.Items.Count;
             for (int currentIndex = 0; currentIndex < itemsCount; currentIndex++)
             {
-                bool currentIfChecked = checkedListBox_EditablePolyLineNames.GetItemChecked(currentIndex);
+                bool currentIfChecked = checkedListBox_EditablePolyLines.GetItemChecked(currentIndex);
                 //string currentItemName = checkedListBox_EditablePolyLineNames.GetItemText(currentIndex);
-                string currentItemName = checkedListBox_EditablePolyLineNames.Items[currentIndex].ToString();
+                string currentItemName = checkedListBox_EditablePolyLines.Items[currentIndex].ToString();
                 IFeatureLayer pFeatureLayer = FunctionCommon.GetFeatureLayerFromName(currentItemName, GlobeStatus.EditablePolyLines);
                 if (currentIfChecked && !GlobeStatus.CheckedPolyLines.Contains(pFeatureLayer))
                 {
@@ -62,22 +82,12 @@ namespace VerticesToCenter
                 }
                 if (!currentIfChecked && GlobeStatus.CheckedPolyLines.Contains(pFeatureLayer))
                     GlobeStatus.CheckedPolyLines.Remove(pFeatureLayer);
-            } 
+            }
         }
 
-        private void button_SelectLayers_Confirm_Click(object sender, EventArgs e)
+        private void SettingTabControlWhenConfirm()
         {
-            SelectLayersWhenOnClosing();
-        }
-
-        private void button_Setting_Confirm_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button_OK_Click(object sender, EventArgs e)
-        {
-            this.Close();
+ 
         }
     }
 }

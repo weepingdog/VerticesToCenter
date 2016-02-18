@@ -28,42 +28,42 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkedListBox_EditablePolyLineNames = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBox_EditablePolyLines = new System.Windows.Forms.CheckedListBox();
             this.button_SelectAll = new System.Windows.Forms.Button();
             this.button_SelectNone = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
+            this.tabControl_Option = new System.Windows.Forms.TabControl();
             this.tabPage_SelectLayers = new System.Windows.Forms.TabPage();
             this.button_SelectLayers_OK = new System.Windows.Forms.Button();
             this.tabPage_Setting = new System.Windows.Forms.TabPage();
             this.button_Setting_OK = new System.Windows.Forms.Button();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label3 = new System.Windows.Forms.Label();
+            this.numericUpDown_MaxFeaturesSelect = new System.Windows.Forms.NumericUpDown();
+            this.label_MaxFeaturesSelect = new System.Windows.Forms.Label();
             this.groupBox_Pixel = new System.Windows.Forms.GroupBox();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.numericUpDown_MaxRadius = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDown_RadiusChangeLimit = new System.Windows.Forms.NumericUpDown();
+            this.label_MaxRadius = new System.Windows.Forms.Label();
+            this.label_RadiusChangeLimit = new System.Windows.Forms.Label();
             this.label_SelectMode = new System.Windows.Forms.Label();
             this.comboBox_SelectMode = new System.Windows.Forms.ComboBox();
             this.checkBox_SnapToCenter = new System.Windows.Forms.CheckBox();
             this.button_OK = new System.Windows.Forms.Button();
-            this.tabControl.SuspendLayout();
+            this.tabControl_Option.SuspendLayout();
             this.tabPage_SelectLayers.SuspendLayout();
             this.tabPage_Setting.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxFeaturesSelect)).BeginInit();
             this.groupBox_Pixel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxRadius)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_RadiusChangeLimit)).BeginInit();
             this.SuspendLayout();
             // 
-            // checkedListBox_EditablePolyLineNames
+            // checkedListBox_EditablePolyLines
             // 
-            this.checkedListBox_EditablePolyLineNames.CheckOnClick = true;
-            this.checkedListBox_EditablePolyLineNames.FormattingEnabled = true;
-            this.checkedListBox_EditablePolyLineNames.Location = new System.Drawing.Point(18, 6);
-            this.checkedListBox_EditablePolyLineNames.Name = "checkedListBox_EditablePolyLineNames";
-            this.checkedListBox_EditablePolyLineNames.Size = new System.Drawing.Size(181, 180);
-            this.checkedListBox_EditablePolyLineNames.TabIndex = 1;
+            this.checkedListBox_EditablePolyLines.CheckOnClick = true;
+            this.checkedListBox_EditablePolyLines.FormattingEnabled = true;
+            this.checkedListBox_EditablePolyLines.Location = new System.Drawing.Point(18, 6);
+            this.checkedListBox_EditablePolyLines.Name = "checkedListBox_EditablePolyLines";
+            this.checkedListBox_EditablePolyLines.Size = new System.Drawing.Size(181, 180);
+            this.checkedListBox_EditablePolyLines.TabIndex = 1;
             // 
             // button_SelectAll
             // 
@@ -85,20 +85,20 @@
             this.button_SelectNone.UseVisualStyleBackColor = true;
             this.button_SelectNone.Click += new System.EventHandler(this.button_SelectNone_Click);
             // 
-            // tabControl
+            // tabControl_Option
             // 
-            this.tabControl.Controls.Add(this.tabPage_SelectLayers);
-            this.tabControl.Controls.Add(this.tabPage_Setting);
-            this.tabControl.Location = new System.Drawing.Point(26, 12);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(242, 306);
-            this.tabControl.TabIndex = 4;
+            this.tabControl_Option.Controls.Add(this.tabPage_SelectLayers);
+            this.tabControl_Option.Controls.Add(this.tabPage_Setting);
+            this.tabControl_Option.Location = new System.Drawing.Point(26, 12);
+            this.tabControl_Option.Name = "tabControl_Option";
+            this.tabControl_Option.SelectedIndex = 0;
+            this.tabControl_Option.Size = new System.Drawing.Size(242, 306);
+            this.tabControl_Option.TabIndex = 4;
             // 
             // tabPage_SelectLayers
             // 
             this.tabPage_SelectLayers.Controls.Add(this.button_SelectLayers_OK);
-            this.tabPage_SelectLayers.Controls.Add(this.checkedListBox_EditablePolyLineNames);
+            this.tabPage_SelectLayers.Controls.Add(this.checkedListBox_EditablePolyLines);
             this.tabPage_SelectLayers.Controls.Add(this.button_SelectNone);
             this.tabPage_SelectLayers.Controls.Add(this.button_SelectAll);
             this.tabPage_SelectLayers.Location = new System.Drawing.Point(4, 22);
@@ -122,8 +122,8 @@
             // tabPage_Setting
             // 
             this.tabPage_Setting.Controls.Add(this.button_Setting_OK);
-            this.tabPage_Setting.Controls.Add(this.numericUpDown1);
-            this.tabPage_Setting.Controls.Add(this.label3);
+            this.tabPage_Setting.Controls.Add(this.numericUpDown_MaxFeaturesSelect);
+            this.tabPage_Setting.Controls.Add(this.label_MaxFeaturesSelect);
             this.tabPage_Setting.Controls.Add(this.groupBox_Pixel);
             this.tabPage_Setting.Controls.Add(this.label_SelectMode);
             this.tabPage_Setting.Controls.Add(this.comboBox_SelectMode);
@@ -146,38 +146,38 @@
             this.button_Setting_OK.UseVisualStyleBackColor = true;
             this.button_Setting_OK.Click += new System.EventHandler(this.button_Setting_Confirm_Click);
             // 
-            // numericUpDown1
+            // numericUpDown_MaxFeaturesSelect
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(146, 168);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
+            this.numericUpDown_MaxFeaturesSelect.Location = new System.Drawing.Point(146, 168);
+            this.numericUpDown_MaxFeaturesSelect.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(51, 21);
-            this.numericUpDown1.TabIndex = 5;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.numericUpDown_MaxFeaturesSelect.Name = "numericUpDown_MaxFeaturesSelect";
+            this.numericUpDown_MaxFeaturesSelect.Size = new System.Drawing.Size(51, 21);
+            this.numericUpDown_MaxFeaturesSelect.TabIndex = 5;
+            this.numericUpDown_MaxFeaturesSelect.Value = new decimal(new int[] {
             10,
             0,
             0,
             0});
             // 
-            // label3
+            // label_MaxFeaturesSelect
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 170);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "MaxFeatureSelect";
+            this.label_MaxFeaturesSelect.AutoSize = true;
+            this.label_MaxFeaturesSelect.Location = new System.Drawing.Point(23, 170);
+            this.label_MaxFeaturesSelect.Name = "label_MaxFeaturesSelect";
+            this.label_MaxFeaturesSelect.Size = new System.Drawing.Size(107, 12);
+            this.label_MaxFeaturesSelect.TabIndex = 4;
+            this.label_MaxFeaturesSelect.Text = "MaxFeaturesSelect";
             // 
             // groupBox_Pixel
             // 
-            this.groupBox_Pixel.Controls.Add(this.numericUpDown3);
-            this.groupBox_Pixel.Controls.Add(this.numericUpDown2);
-            this.groupBox_Pixel.Controls.Add(this.label2);
-            this.groupBox_Pixel.Controls.Add(this.label1);
+            this.groupBox_Pixel.Controls.Add(this.numericUpDown_MaxRadius);
+            this.groupBox_Pixel.Controls.Add(this.numericUpDown_RadiusChangeLimit);
+            this.groupBox_Pixel.Controls.Add(this.label_MaxRadius);
+            this.groupBox_Pixel.Controls.Add(this.label_RadiusChangeLimit);
             this.groupBox_Pixel.Location = new System.Drawing.Point(12, 64);
             this.groupBox_Pixel.Name = "groupBox_Pixel";
             this.groupBox_Pixel.Size = new System.Drawing.Size(193, 91);
@@ -185,62 +185,62 @@
             this.groupBox_Pixel.TabStop = false;
             this.groupBox_Pixel.Text = "PixelOption";
             // 
-            // numericUpDown3
+            // numericUpDown_MaxRadius
             // 
-            this.numericUpDown3.Location = new System.Drawing.Point(134, 53);
-            this.numericUpDown3.Maximum = new decimal(new int[] {
+            this.numericUpDown_MaxRadius.Location = new System.Drawing.Point(134, 53);
+            this.numericUpDown_MaxRadius.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
-            this.numericUpDown3.Minimum = new decimal(new int[] {
+            this.numericUpDown_MaxRadius.Minimum = new decimal(new int[] {
             6,
             0,
             0,
             0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(53, 21);
-            this.numericUpDown3.TabIndex = 3;
-            this.numericUpDown3.Value = new decimal(new int[] {
+            this.numericUpDown_MaxRadius.Name = "numericUpDown_MaxRadius";
+            this.numericUpDown_MaxRadius.Size = new System.Drawing.Size(53, 21);
+            this.numericUpDown_MaxRadius.TabIndex = 3;
+            this.numericUpDown_MaxRadius.Value = new decimal(new int[] {
             500,
             0,
             0,
             0});
             // 
-            // numericUpDown2
+            // numericUpDown_RadiusChangeLimit
             // 
-            this.numericUpDown2.Location = new System.Drawing.Point(134, 25);
-            this.numericUpDown2.Minimum = new decimal(new int[] {
+            this.numericUpDown_RadiusChangeLimit.Location = new System.Drawing.Point(134, 25);
+            this.numericUpDown_RadiusChangeLimit.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(55, 21);
-            this.numericUpDown2.TabIndex = 2;
-            this.numericUpDown2.Value = new decimal(new int[] {
+            this.numericUpDown_RadiusChangeLimit.Name = "numericUpDown_RadiusChangeLimit";
+            this.numericUpDown_RadiusChangeLimit.Size = new System.Drawing.Size(55, 21);
+            this.numericUpDown_RadiusChangeLimit.TabIndex = 2;
+            this.numericUpDown_RadiusChangeLimit.Value = new decimal(new int[] {
             3,
             0,
             0,
             0});
             // 
-            // label2
+            // label_MaxRadius
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(11, 53);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 12);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "MaxRadius";
+            this.label_MaxRadius.AutoSize = true;
+            this.label_MaxRadius.Location = new System.Drawing.Point(11, 53);
+            this.label_MaxRadius.Name = "label_MaxRadius";
+            this.label_MaxRadius.Size = new System.Drawing.Size(59, 12);
+            this.label_MaxRadius.TabIndex = 1;
+            this.label_MaxRadius.Text = "MaxRadius";
             // 
-            // label1
+            // label_RadiusChangeLimit
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(107, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "RadiusChangeLimit";
+            this.label_RadiusChangeLimit.AutoSize = true;
+            this.label_RadiusChangeLimit.Location = new System.Drawing.Point(11, 27);
+            this.label_RadiusChangeLimit.Name = "label_RadiusChangeLimit";
+            this.label_RadiusChangeLimit.Size = new System.Drawing.Size(107, 12);
+            this.label_RadiusChangeLimit.TabIndex = 0;
+            this.label_RadiusChangeLimit.Text = "RadiusChangeLimit";
             // 
             // label_SelectMode
             // 
@@ -285,42 +285,42 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(306, 363);
             this.Controls.Add(this.button_OK);
-            this.Controls.Add(this.tabControl);
+            this.Controls.Add(this.tabControl_Option);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormOptionVerticesToCenter";
             this.Text = "OptionVerticesToCenter";
-            this.tabControl.ResumeLayout(false);
+            this.tabControl_Option.ResumeLayout(false);
             this.tabPage_SelectLayers.ResumeLayout(false);
             this.tabPage_Setting.ResumeLayout(false);
             this.tabPage_Setting.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxFeaturesSelect)).EndInit();
             this.groupBox_Pixel.ResumeLayout(false);
             this.groupBox_Pixel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxRadius)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_RadiusChangeLimit)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.CheckedListBox checkedListBox_EditablePolyLineNames;
+        private System.Windows.Forms.CheckedListBox checkedListBox_EditablePolyLines;
         private System.Windows.Forms.Button button_SelectAll;
         private System.Windows.Forms.Button button_SelectNone;
-        private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.TabControl tabControl_Option;
         private System.Windows.Forms.TabPage tabPage_SelectLayers;
         private System.Windows.Forms.TabPage tabPage_Setting;
         private System.Windows.Forms.CheckBox checkBox_SnapToCenter;
         private System.Windows.Forms.Label label_SelectMode;
         private System.Windows.Forms.ComboBox comboBox_SelectMode;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numericUpDown_MaxFeaturesSelect;
+        private System.Windows.Forms.Label label_MaxFeaturesSelect;
         private System.Windows.Forms.GroupBox groupBox_Pixel;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.NumericUpDown numericUpDown_MaxRadius;
+        private System.Windows.Forms.NumericUpDown numericUpDown_RadiusChangeLimit;
+        private System.Windows.Forms.Label label_MaxRadius;
+        private System.Windows.Forms.Label label_RadiusChangeLimit;
         private System.Windows.Forms.Button button_SelectLayers_OK;
         private System.Windows.Forms.Button button_Setting_OK;
         private System.Windows.Forms.Button button_OK;
