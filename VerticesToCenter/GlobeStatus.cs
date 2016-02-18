@@ -36,6 +36,17 @@ namespace VerticesToCenter
                 return Map as IActiveView;
             }
         }
+        public static IEditor Editor
+        {
+            get
+            {
+                UID editorUID = new UID();
+                editorUID.Value = "esriEditor.Editor";
+                IEditor editor = ArcMap.Application.FindExtensionByCLSID(editorUID) as IEditor;
+                return editor;
+            }
+        }
+        public static string LastPathName = "";        
         public static bool IsEditing
         {
             get
@@ -49,5 +60,7 @@ namespace VerticesToCenter
                     return false;
             }
         }
+        public static PolyLinesVTC EditablePolyLines = new PolyLinesVTC();
+        public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
     }
 }
