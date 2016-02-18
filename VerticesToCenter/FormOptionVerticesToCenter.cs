@@ -29,7 +29,6 @@ namespace VerticesToCenter
             } 
         }
 
-        //Tabcontrol SelectLayers
         private void button_SelectAll_Click(object sender, EventArgs e)
         {
             int itemCount = checkedListBox_EditablePolyLineNames.Items.Count;

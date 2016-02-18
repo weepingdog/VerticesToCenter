@@ -33,9 +33,13 @@
             this.button_SelectNone = new System.Windows.Forms.Button();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPage_SelectLayers = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage_Setting = new System.Windows.Forms.TabPage();
+            this.checkBox_SnapToCenter = new System.Windows.Forms.CheckBox();
+            this.comboBox_SelectMode = new System.Windows.Forms.ComboBox();
+            this.label_SelectMode = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPage_SelectLayers.SuspendLayout();
+            this.tabPage_Setting.SuspendLayout();
             this.SuspendLayout();
             // 
             // checkedListBox_EditablePolyLineNames
@@ -69,7 +73,7 @@
             // tabControl
             // 
             this.tabControl.Controls.Add(this.tabPage_SelectLayers);
-            this.tabControl.Controls.Add(this.tabPage2);
+            this.tabControl.Controls.Add(this.tabPage_Setting);
             this.tabControl.Location = new System.Drawing.Point(26, 12);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
@@ -89,15 +93,45 @@
             this.tabPage_SelectLayers.Text = "SelectLayers";
             this.tabPage_SelectLayers.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabPage_Setting
             // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(234, 288);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "tabPage2";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.tabPage_Setting.Controls.Add(this.label_SelectMode);
+            this.tabPage_Setting.Controls.Add(this.comboBox_SelectMode);
+            this.tabPage_Setting.Controls.Add(this.checkBox_SnapToCenter);
+            this.tabPage_Setting.Location = new System.Drawing.Point(4, 22);
+            this.tabPage_Setting.Name = "tabPage_Setting";
+            this.tabPage_Setting.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage_Setting.Size = new System.Drawing.Size(234, 288);
+            this.tabPage_Setting.TabIndex = 1;
+            this.tabPage_Setting.Text = "Setting";
+            this.tabPage_Setting.UseVisualStyleBackColor = true;
+            // 
+            // checkBox_SnapToCenter
+            // 
+            this.checkBox_SnapToCenter.AutoSize = true;
+            this.checkBox_SnapToCenter.Location = new System.Drawing.Point(6, 6);
+            this.checkBox_SnapToCenter.Name = "checkBox_SnapToCenter";
+            this.checkBox_SnapToCenter.Size = new System.Drawing.Size(96, 16);
+            this.checkBox_SnapToCenter.TabIndex = 0;
+            this.checkBox_SnapToCenter.Text = "SnapToCenter";
+            this.checkBox_SnapToCenter.UseVisualStyleBackColor = true;
+            // 
+            // comboBox_SelectMode
+            // 
+            this.comboBox_SelectMode.FormattingEnabled = true;
+            this.comboBox_SelectMode.Location = new System.Drawing.Point(85, 28);
+            this.comboBox_SelectMode.Name = "comboBox_SelectMode";
+            this.comboBox_SelectMode.Size = new System.Drawing.Size(121, 20);
+            this.comboBox_SelectMode.TabIndex = 1;
+            // 
+            // label_SelectMode
+            // 
+            this.label_SelectMode.AutoSize = true;
+            this.label_SelectMode.Location = new System.Drawing.Point(7, 35);
+            this.label_SelectMode.Name = "label_SelectMode";
+            this.label_SelectMode.Size = new System.Drawing.Size(65, 12);
+            this.label_SelectMode.TabIndex = 2;
+            this.label_SelectMode.Text = "SelectMode";
             // 
             // FormOptionVerticesToCenter
             // 
@@ -109,6 +143,8 @@
             this.Text = "FormOptionVerticesToCenter";
             this.tabControl.ResumeLayout(false);
             this.tabPage_SelectLayers.ResumeLayout(false);
+            this.tabPage_Setting.ResumeLayout(false);
+            this.tabPage_Setting.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -120,6 +156,9 @@
         private System.Windows.Forms.Button button_SelectNone;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabPage_SelectLayers;
-        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage_Setting;
+        private System.Windows.Forms.CheckBox checkBox_SnapToCenter;
+        private System.Windows.Forms.Label label_SelectMode;
+        private System.Windows.Forms.ComboBox comboBox_SelectMode;
     }
 }
