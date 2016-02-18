@@ -67,7 +67,7 @@
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Editor, Version=10.1.0.0, Culture=neutral, PublicKeyToken=8fc3cc631e44ad86, processorArchitecture=MSIL">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="ESRI.ArcGIS.Framework">
       <Private>False</Private>
@@ -97,7 +97,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Config.esriaddinx</DependentUpon>
     </Compile>
+    <Compile Include="FormOptionVerticesToCenter.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOptionVerticesToCenter.Designer.cs">
+      <DependentUpon>FormOptionVerticesToCenter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FunctionCommon.cs" />
     <Compile Include="GlobeStatus.cs" />
+    <Compile Include="PolyLinesVTC.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +157,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="FormOptionVerticesToCenter.resx">
+      <DependentUpon>FormOptionVerticesToCenter.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <ZipFileExtension>esriAddIn</ZipFileExtension>
