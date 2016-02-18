@@ -7,6 +7,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Editor;
+using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.esriSystem;
 namespace VerticesToCenter
 {
@@ -46,7 +47,11 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        
+        public static IWorkspace EditWorkspace()
+        {
+            return Editor.EditWorkspace;
+        }
+
         public static bool IsEditing
         {
             get
@@ -87,7 +92,7 @@ namespace VerticesToCenter
             m_CenterSnap = centerSnap; 
         }
 
-        private static EnumSelectMode m_SelectMod = EnumSelectMode.mostNearOne;
+        private static EnumSelectMode m_SelectMod = EnumSelectMode.MostNearOne;
         public static EnumSelectMode SelectMode
         {
             get { return m_SelectMod; }
@@ -104,7 +109,18 @@ namespace VerticesToCenter
         }
         public static void UpdateRadiusChangeLimit(int radiusChangeLimit)
         {
+            if (radiusChangeLimit < 1)
+            {
+                m_RadiusChangeLimit = 1;
+                return;
+            }
+            if (radiusChangeLimit > 100)
+            {
+                m_RadiusChangeLimit = 100;
+                return;
+            }
             m_RadiusChangeLimit = radiusChangeLimit;
+            
         }
 
         private static int m_MaxRadius = 500;
@@ -114,6 +130,16 @@ namespace VerticesToCenter
         }
         public static void UpdateMaxRadius(int maxRadius)
         {
+            if (maxRadius < 2)
+            {
+                m_MaxRadius = 2;
+                return;
+            }
+            if (maxRadius > 1000)
+            {
+                m_MaxRadius = 1000;
+                return;
+            }
             m_MaxRadius = maxRadius;
         }
 
@@ -124,7 +150,17 @@ namespace VerticesToCenter
         }
         public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
         {
-            m_MaxFeaturesSelect=maxFeaturesSelect;
+            if (maxFeaturesSelect < 1)
+            {
+                m_MaxFeaturesSelect = 1;
+                return; 
+            }
+            if (maxFeaturesSelect > 100)
+            {
+                m_MaxFeaturesSelect = 100;
+                return;
+            }
+            m_MaxFeaturesSelect = maxFeaturesSelect;
         }
     }
 

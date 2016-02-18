@@ -33,9 +33,10 @@
             this.button_SelectNone = new System.Windows.Forms.Button();
             this.tabControl_Option = new System.Windows.Forms.TabControl();
             this.tabPage_SelectLayers = new System.Windows.Forms.TabPage();
-            this.button_SelectLayers_OK = new System.Windows.Forms.Button();
+            this.button_SelectLayers_Confirm = new System.Windows.Forms.Button();
             this.tabPage_Setting = new System.Windows.Forms.TabPage();
-            this.button_Setting_OK = new System.Windows.Forms.Button();
+            this.button_SettingDefault = new System.Windows.Forms.Button();
+            this.button_Setting_Confirm = new System.Windows.Forms.Button();
             this.numericUpDown_MaxFeaturesSelect = new System.Windows.Forms.NumericUpDown();
             this.label_MaxFeaturesSelect = new System.Windows.Forms.Label();
             this.groupBox_Pixel = new System.Windows.Forms.GroupBox();
@@ -97,7 +98,7 @@
             // 
             // tabPage_SelectLayers
             // 
-            this.tabPage_SelectLayers.Controls.Add(this.button_SelectLayers_OK);
+            this.tabPage_SelectLayers.Controls.Add(this.button_SelectLayers_Confirm);
             this.tabPage_SelectLayers.Controls.Add(this.checkedListBox_EditablePolyLines);
             this.tabPage_SelectLayers.Controls.Add(this.button_SelectNone);
             this.tabPage_SelectLayers.Controls.Add(this.button_SelectAll);
@@ -109,19 +110,20 @@
             this.tabPage_SelectLayers.Text = "SelectLayers";
             this.tabPage_SelectLayers.UseVisualStyleBackColor = true;
             // 
-            // button_SelectLayers_OK
+            // button_SelectLayers_Confirm
             // 
-            this.button_SelectLayers_OK.Location = new System.Drawing.Point(18, 241);
-            this.button_SelectLayers_OK.Name = "button_SelectLayers_OK";
-            this.button_SelectLayers_OK.Size = new System.Drawing.Size(75, 23);
-            this.button_SelectLayers_OK.TabIndex = 4;
-            this.button_SelectLayers_OK.Text = "Confirm";
-            this.button_SelectLayers_OK.UseVisualStyleBackColor = true;
-            this.button_SelectLayers_OK.Click += new System.EventHandler(this.button_SelectLayers_Confirm_Click);
+            this.button_SelectLayers_Confirm.Location = new System.Drawing.Point(18, 241);
+            this.button_SelectLayers_Confirm.Name = "button_SelectLayers_Confirm";
+            this.button_SelectLayers_Confirm.Size = new System.Drawing.Size(75, 23);
+            this.button_SelectLayers_Confirm.TabIndex = 4;
+            this.button_SelectLayers_Confirm.Text = "Confirm";
+            this.button_SelectLayers_Confirm.UseVisualStyleBackColor = true;
+            this.button_SelectLayers_Confirm.Click += new System.EventHandler(this.button_SelectLayers_Confirm_Click);
             // 
             // tabPage_Setting
             // 
-            this.tabPage_Setting.Controls.Add(this.button_Setting_OK);
+            this.tabPage_Setting.Controls.Add(this.button_SettingDefault);
+            this.tabPage_Setting.Controls.Add(this.button_Setting_Confirm);
             this.tabPage_Setting.Controls.Add(this.numericUpDown_MaxFeaturesSelect);
             this.tabPage_Setting.Controls.Add(this.label_MaxFeaturesSelect);
             this.tabPage_Setting.Controls.Add(this.groupBox_Pixel);
@@ -136,15 +138,25 @@
             this.tabPage_Setting.Text = "Setting";
             this.tabPage_Setting.UseVisualStyleBackColor = true;
             // 
-            // button_Setting_OK
+            // button_SettingDefault
             // 
-            this.button_Setting_OK.Location = new System.Drawing.Point(136, 223);
-            this.button_Setting_OK.Name = "button_Setting_OK";
-            this.button_Setting_OK.Size = new System.Drawing.Size(69, 28);
-            this.button_Setting_OK.TabIndex = 6;
-            this.button_Setting_OK.Text = "Confirm";
-            this.button_Setting_OK.UseVisualStyleBackColor = true;
-            this.button_Setting_OK.Click += new System.EventHandler(this.button_Setting_Confirm_Click);
+            this.button_SettingDefault.Location = new System.Drawing.Point(15, 223);
+            this.button_SettingDefault.Name = "button_SettingDefault";
+            this.button_SettingDefault.Size = new System.Drawing.Size(75, 28);
+            this.button_SettingDefault.TabIndex = 6;
+            this.button_SettingDefault.Text = "Default";
+            this.button_SettingDefault.UseVisualStyleBackColor = true;
+            this.button_SettingDefault.Click += new System.EventHandler(this.button_SettingDefault_Click);
+            // 
+            // button_Setting_Confirm
+            // 
+            this.button_Setting_Confirm.Location = new System.Drawing.Point(136, 223);
+            this.button_Setting_Confirm.Name = "button_Setting_Confirm";
+            this.button_Setting_Confirm.Size = new System.Drawing.Size(69, 28);
+            this.button_Setting_Confirm.TabIndex = 6;
+            this.button_Setting_Confirm.Text = "Confirm";
+            this.button_Setting_Confirm.UseVisualStyleBackColor = true;
+            this.button_Setting_Confirm.Click += new System.EventHandler(this.button_Setting_Confirm_Click);
             // 
             // numericUpDown_MaxFeaturesSelect
             // 
@@ -321,8 +333,9 @@
         private System.Windows.Forms.NumericUpDown numericUpDown_RadiusChangeLimit;
         private System.Windows.Forms.Label label_MaxRadius;
         private System.Windows.Forms.Label label_RadiusChangeLimit;
-        private System.Windows.Forms.Button button_SelectLayers_OK;
-        private System.Windows.Forms.Button button_Setting_OK;
+        private System.Windows.Forms.Button button_SelectLayers_Confirm;
+        private System.Windows.Forms.Button button_Setting_Confirm;
         private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Button button_SettingDefault;
     }
 }

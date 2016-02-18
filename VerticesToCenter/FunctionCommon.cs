@@ -44,9 +44,9 @@ namespace VerticesToCenter
     }
     public enum EnumSelectMode
     {
-        mostNearOne = 0,//最近点
-        onlyFirst = 1,//首点 ID=0-，实际的末点
-        onlyLast = 2, //末点，ID=N-1，实际的首点
-        bothFirstAndLast = 3,//两端的点
+        MostNearOne = 0,//最近点
+        OnlyFirst = 1,//首点 ID=0-，实际的末点
+        OnlyLast = 2, //末点，ID=N-1，实际的首点
+        BothFirstAndLast = 3,//两端的点
     }
 }

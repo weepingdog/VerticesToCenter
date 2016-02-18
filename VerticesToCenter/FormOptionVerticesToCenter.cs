@@ -15,6 +15,7 @@ namespace VerticesToCenter
         public FormOptionVerticesToCenter()
         {
             InitializeComponent();
+            UpdateComboBoxSelectMode();
             SelectLayersTapControlWhenFormStart();
             SettingTapControlWhenFormStart();
         }
@@ -33,7 +34,18 @@ namespace VerticesToCenter
 
         private void SettingTapControlWhenFormStart()
         {
- 
+            checkBox_CenterSnap.Checked = GlobeStatus.CenterSnap;
+            comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.SelectMode);
+            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.RadiusChangeLimit;
+            numericUpDown_MaxRadius.Value = GlobeStatus.MaxRadius;
+            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.MaxFeaturesSelect;  
+        }
+
+        private void UpdateComboBoxSelectMode()
+        {
+            comboBox_SelectMode.Items.Clear();
+            foreach(object item in Enum.GetNames(typeof(EnumSelectMode)))
+                comboBox_SelectMode.Items.Add(item);        
         }
 
         private void button_SelectAll_Click(object sender, EventArgs e)
@@ -87,7 +99,21 @@ namespace VerticesToCenter
 
         private void SettingTabControlWhenConfirm()
         {
- 
+            GlobeStatus.UpdateCenterSnap(checkBox_CenterSnap.Checked);
+            GlobeStatus.UpdateSelectMode((EnumSelectMode)comboBox_SelectMode.SelectedIndex);
+            GlobeStatus.UpdateRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
+            GlobeStatus.UpdateMaxRadius((int)numericUpDown_MaxRadius.Value);
+            GlobeStatus.UpdateMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
+        }
+
+        private void button_SettingDefault_Click(object sender, EventArgs e)
+        {
+            GlobeStatus.UpdateCenterSnap(true);
+            GlobeStatus.UpdateSelectMode(EnumSelectMode.MostNearOne);
+            GlobeStatus.UpdateRadiusChangeLimit(3);
+            GlobeStatus.UpdateMaxRadius(500);
+            GlobeStatus.UpdateMaxFeaturesSelect(10);
+            SettingTapControlWhenFormStart();
         }
     }
 }
