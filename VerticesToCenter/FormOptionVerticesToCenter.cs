@@ -44,9 +44,8 @@ namespace VerticesToCenter
         }
 
         protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
-        {
-            SelectLayersWhenOnClosing();
-            
+        {           
+          
         }
         private void SelectLayersWhenOnClosing()
         {
@@ -64,6 +63,21 @@ namespace VerticesToCenter
                 if (!currentIfChecked && GlobeStatus.CheckedPolyLines.Contains(pFeatureLayer))
                     GlobeStatus.CheckedPolyLines.Remove(pFeatureLayer);
             } 
+        }
+
+        private void button_SelectLayers_Confirm_Click(object sender, EventArgs e)
+        {
+            SelectLayersWhenOnClosing();
+        }
+
+        private void button_Setting_Confirm_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button_OK_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
