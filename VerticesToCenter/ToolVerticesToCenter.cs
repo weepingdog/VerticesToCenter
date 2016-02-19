@@ -17,7 +17,9 @@ namespace VerticesToCenter
         private double m_LastRadius=0;
         private IPoint m_PointCentre;
 
+        private INewLineFeedback m_LineFeedbackTest;    //跟踪线(一根，测试)
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
+        //private IList<INewLineFeedback> m_LineFeedbackList = new List<INewLineFeedback>();
 
         #region "1 System Event"
         public ToolVerticesToCenter()
@@ -56,13 +58,35 @@ namespace VerticesToCenter
             m_PointCentre = PointMouseDown;
 
             //开始追踪圆
+            CircleFeedBackWhenMouseDown(m_PointCentre);
+
+            //dev
+            //开始追踪测试线（一条，与圆心重合）
+            LineFeedBackTestWhenMouseDown(m_PointCentre);
+
+            m_isMouseDown = true;
+        }
+        private void CircleFeedBackWhenMouseDown(IPoint pointCentre)
+        {
+            //开始追踪圆
             if (m_CircleFeedback == null)
             {
                 m_CircleFeedback = new NewCircleFeedbackClass();
                 m_CircleFeedback.Display = GlobeStatus.ActiveView.ScreenDisplay;
-                m_CircleFeedback.Start(m_PointCentre);
+                m_CircleFeedback.Start(pointCentre);
             }
-            m_isMouseDown = true;
+        }
+        private void LineFeedBackTestWhenMouseDown(IPoint pointCentre)
+        {
+            IPoint PointLineTestFrom = pointCentre;
+            PointLineTestFrom.X += 50;
+            PointLineTestFrom.Y += 50;
+            if (m_LineFeedbackTest == null)
+            {                
+                m_LineFeedbackTest = new NewLineFeedback();                
+                m_LineFeedbackTest.Display = GlobeStatus.ActiveView.ScreenDisplay;
+                m_LineFeedbackTest.Start(PointLineTestFrom);
+            }
         }
 
         protected override void OnMouseMove(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
@@ -77,10 +101,29 @@ namespace VerticesToCenter
                 return;
 
             //跟踪圆
-            if (m_CircleFeedback != null)
-                m_CircleFeedback.MoveTo(PointMouseMoveTo);
+            CircleFeedBackWhenMouseMove(PointMouseMoveTo);
+
+            //dev
+            //跟踪测试线（一个测试点）
+            LineFeedBackTestWhenMouseMove(PointMouseMoveTo);
 
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
+        }
+        private void CircleFeedBackWhenMouseMove(IPoint pointMouseMoveTo)
+        {
+            if (m_CircleFeedback != null)
+                m_CircleFeedback.MoveTo(pointMouseMoveTo);
+        }
+        private void LineFeedBackTestWhenMouseMove(IPoint pointMouseMoveTo)
+        {
+            IPoint PointLineTestMoveTo = pointMouseMoveTo;
+            PointLineTestMoveTo.X += 50;
+            PointLineTestMoveTo.Y += 50;
+            //IPoint PointLineTo = new PointClass();
+            //PointLineTo.X = pointMouseMoveTo.X + 50;
+            //PointLineTo.Y = pointMouseMoveTo.Y + 50;
+            if (m_LineFeedbackTest != null)
+                m_LineFeedbackTest.MoveTo(PointLineTestMoveTo);
         }
 
         protected override void OnMouseUp(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
@@ -96,11 +139,26 @@ namespace VerticesToCenter
             //追踪圆停止
             //（并存取圆弧，用于构造圆形；
             //实际上也可以利用圆心(鼠标按下)，圆上一点（鼠标放开）来构造圆形）
-            ICircularArc pCircularArc = m_CircleFeedback.Stop();
-            m_CircleFeedback = null;
+            CircleFeedbackWhenMouseUp(PointMouseUp);
+
+            //追踪测试线停止
+            LineFeedbackTestWhenMouseUp(PointMouseUp);
 
             //刷新窗口图形
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);          
+        }
+        private void CircleFeedbackWhenMouseUp(IPoint pointMouseUp)
+        {
+            ICircularArc pCircularArc = m_CircleFeedback.Stop();
+            m_CircleFeedback = null; 
+        }
+        private void LineFeedbackTestWhenMouseUp(IPoint pointMouseUp)
+        {
+            IPoint PointLineUp = pointMouseUp;
+            PointLineUp.X += 50;
+            PointLineUp.Y += 50;
+            IPolyline pPolyline = m_LineFeedbackTest.Stop();
+            m_LineFeedbackTest = null;
         }
         #endregion
     }
