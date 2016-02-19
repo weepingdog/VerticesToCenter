@@ -51,11 +51,18 @@ namespace VerticesToCenter
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
             //GlobeStatus.ActiveView.Refresh(); 
 
-            //鼠标按下点作为圆心点
+            //鼠标按下点作为圆心点//或者捕捉
             IPoint PointMouseDown = GlobeStatus.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(arg.X, arg.Y);
             if (PointMouseDown == null)
                 return;
-            m_PointCentre = PointMouseDown;
+            if (GlobeStatus.CenterSnap)
+            {
+                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.RadiusChangeLimit);
+            }
+            else
+            {
+                m_PointCentre = PointMouseDown;
+            }
 
             //开始追踪圆
             CircleFeedBackWhenMouseDown(m_PointCentre);
@@ -91,9 +98,13 @@ namespace VerticesToCenter
 
         protected override void OnMouseMove(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
         {
-            //鼠标未按下无效（要等同于拖曳操作）
+            //鼠标未按下无效（要等同于拖曳操作）,但提示捕捉圆心点(在开启捕捉情况下)
             if (!m_isMouseDown)
-                return;
+            {
+                if (GlobeStatus.CenterSnap)
+                    PointSnapWhenMouseMove();
+                return; 
+            }
 
             //移动到的点
             IPoint PointMouseMoveTo = GlobeStatus.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(arg.X, arg.Y);
@@ -145,7 +156,8 @@ namespace VerticesToCenter
             LineFeedbackTestWhenMouseUp(PointMouseUp);
 
             //刷新窗口图形
-            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);          
+            //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
+            GlobeStatus.ActiveView.Refresh();
         }
         private void CircleFeedbackWhenMouseUp(IPoint pointMouseUp)
         {
@@ -161,6 +173,15 @@ namespace VerticesToCenter
             m_LineFeedbackTest = null;
         }
         #endregion
-    }
 
+        private IPoint PointSnapWhenMouseDown(IPoint pointCenter,int pixels)
+        {
+            IPoint PointSnap = pointCenter;
+            return PointSnap;
+        }
+        private void PointSnapWhenMouseMove()
+        {
+
+        }
+    }
 }
