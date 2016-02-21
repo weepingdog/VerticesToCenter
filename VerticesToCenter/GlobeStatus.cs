@@ -65,6 +65,11 @@ namespace VerticesToCenter
                     return false;
             }
         }
+
+        public static double MapUnit
+        {
+            get { return FunctionCommon.GetMapUnit(ActiveView); }
+        }
         
         //LastPathName -- EditWorkspace
         private static string m_LastPathName="";
@@ -102,65 +107,65 @@ namespace VerticesToCenter
             m_SelectMod = selectMod;
         }
 
-        private static int m_RadiusChangeLimit = 3;
-        public static int RadiusChangeLimit
+        private static int m_PixelRadiusChangeLimit = 1;
+        public static int PixelRadiusChangeLimit
         {
-            get { return m_RadiusChangeLimit; }
+            get { return m_PixelRadiusChangeLimit; }
         }
-        public static void UpdateRadiusChangeLimit(int radiusChangeLimit)
+        public static void UpdatePixelRadiusChangeLimit(int pixelRadiusChangeLimit)
         {
-            if (radiusChangeLimit < 1)
+            if (pixelRadiusChangeLimit < 1)
             {
-                m_RadiusChangeLimit = 1;
+                m_PixelRadiusChangeLimit = 1;
                 return;
             }
-            if (radiusChangeLimit > 100)
+            if (pixelRadiusChangeLimit > 100)
             {
-                m_RadiusChangeLimit = 100;
+                m_PixelRadiusChangeLimit = 100;
                 return;
             }
-            m_RadiusChangeLimit = radiusChangeLimit;
+            m_PixelRadiusChangeLimit = pixelRadiusChangeLimit;
             
         }
 
-        private static int m_MaxRadius = 500;
-        public static int MaxRadius
+        private static int m_PixelMaxRadius = 200;
+        public static int PixelMaxRadius
         {
-            get { return m_MaxRadius; }
+            get { return m_PixelMaxRadius; }
         }
-        public static void UpdateMaxRadius(int maxRadius)
+        public static void UpdatePixelMaxRadius(int PixelMaxRadius)
         {
-            if (maxRadius < 2)
+            if (PixelMaxRadius < 2)
             {
-                m_MaxRadius = 2;
+                m_PixelMaxRadius = 2;
                 return;
             }
-            if (maxRadius > 1000)
+            if (PixelMaxRadius > 1000)
             {
-                m_MaxRadius = 1000;
+                m_PixelMaxRadius = 1000;
                 return;
             }
-            m_MaxRadius = maxRadius;
+            m_PixelMaxRadius = PixelMaxRadius;
         }
 
-        private static int m_MaxFeaturesSelect = 10;
-        public static int MaxFeaturesSelect
+        private static int m_PixelMaxFeaturesSelect = 10;
+        public static int PixelMaxFeaturesSelect
         {
-            get { return m_MaxFeaturesSelect; }
+            get { return m_PixelMaxFeaturesSelect; }
         }
-        public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
+        public static void UpdatePixelMaxFeaturesSelect(int pixelMaxFeaturesSelect)
         {
-            if (maxFeaturesSelect < 1)
+            if (pixelMaxFeaturesSelect < 1)
             {
-                m_MaxFeaturesSelect = 1;
+                m_PixelMaxFeaturesSelect = 1;
                 return; 
             }
-            if (maxFeaturesSelect > 100)
+            if (pixelMaxFeaturesSelect > 100)
             {
-                m_MaxFeaturesSelect = 100;
+                m_PixelMaxFeaturesSelect = 100;
                 return;
             }
-            m_MaxFeaturesSelect = maxFeaturesSelect;
+            m_PixelMaxFeaturesSelect = pixelMaxFeaturesSelect;
         }
     }
 
