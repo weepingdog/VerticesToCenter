@@ -18,10 +18,10 @@ namespace VerticesToCenter
         
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
 
-        private int m_LastSelectFeatureCount = 0;
-        private double m_LastRadius = 0;
-        private int m_LastTrackPointCount = 0;
+        //private int m_LastSelectFeatureCount = 0;
+        private double m_LastRadius = 0;        
         private IList<TrackPoint> m_TrackPointList = new List<TrackPoint>();
+        int m_LastTrackPointCount = 0;
 
         #region "1 System Event"
         public ToolVerticesToCenter()
@@ -88,10 +88,10 @@ namespace VerticesToCenter
         private void TrackPointFeedBackWhenMouseDown(IPoint pointCentre)
         {
             //正常情况下，此时TrackPointCount为0
-            int TrackPointCount = m_TrackPointList.Count;
-            for (int i = TrackPointCount-1; i >0 ; i--)
-                m_TrackPointList[i].NewLineFeedback = null;
-            m_TrackPointList.Clear();
+            //int TrackPointCount = m_TrackPointList.Count;
+            //for (int i = TrackPointCount-1; i >0 ; i--)
+            //    m_TrackPointList[i].NewLineFeedback = null;
+            //m_TrackPointList.Clear();
         }
 
         protected override void OnMouseMove(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
@@ -168,22 +168,22 @@ namespace VerticesToCenter
             }
             if (distanceChange < 0)
             {
-                int CurrentTrackPointCount = m_TrackPointList.Count;
+                //int CurrentTrackPointCount = m_TrackPointList.Count;
 
-                for (int i = CurrentTrackPointCount - 1; i >= 0; i--)
-                {
-                    if (m_TrackPointList[i].DistanceToCenter > currentRadius)
-                    {                        
-                        m_TrackPointList[i].NewLineFeedback = null;
-                        m_TrackPointList.RemoveAt(i);                        
-                    }
-                }
+                //for (int i = CurrentTrackPointCount - 1; i >= 0; i--)
+                //{
+                //    if (m_TrackPointList[i].DistanceToCenter > currentRadius)
+                //    {                        
+                //        m_TrackPointList[i].NewLineFeedback = null;
+                //        m_TrackPointList.RemoveAt(i);                        
+                //    }
+                //}
 
-                if (m_LastTrackPointCount > m_TrackPointList.Count)
-                {
-                    m_LastTrackPointCount = m_TrackPointList.Count;
-                    m_LastRadius = currentRadius;
-                }
+                //if (m_LastTrackPointCount > m_TrackPointList.Count)
+                //{
+                //    m_LastTrackPointCount = m_TrackPointList.Count;
+                //    m_LastRadius = currentRadius;
+                //}
             }
             else
             {
@@ -209,16 +209,16 @@ namespace VerticesToCenter
                 int CurrentTrackPointCount=m_TrackPointList.Count;
                 if (m_LastTrackPointCount < CurrentTrackPointCount)
                 {
-                    for (int i = m_LastTrackPointCount; i < CurrentTrackPointCount; i++)
-                    {                        
-                        if (m_TrackPointList[i].NewLineFeedback == null)
-                        {
-                            m_TrackPointList[i].NewLineFeedback = new NewLineFeedback();
-                            m_TrackPointList[i].NewLineFeedback.Display = GlobeStatus.ActiveView.ScreenDisplay;
-                            m_TrackPointList[i].NewLineFeedback.Start(m_PointCentre);
-                            m_TrackPointList[i].NewLineFeedback.MoveTo(m_TrackPointList[i].PointMoveTo);
-                        }
-                    }
+                    //for (int i = m_LastTrackPointCount; i < CurrentTrackPointCount; i++)
+                    //{                        
+                    //    if (m_TrackPointList[i].NewLineFeedback == null)
+                    //    {
+                    //        m_TrackPointList[i].NewLineFeedback = new NewLineFeedback();
+                    //        m_TrackPointList[i].NewLineFeedback.Display = GlobeStatus.ActiveView.ScreenDisplay;
+                    //        m_TrackPointList[i].NewLineFeedback.Start(m_PointCentre);
+                    //        m_TrackPointList[i].NewLineFeedback.MoveTo(m_TrackPointList[i].PointMoveTo);
+                    //    }
+                    //}
                     m_LastRadius = currentRadius;
                     m_LastTrackPointCount = CurrentTrackPointCount;
                 }
@@ -245,11 +245,11 @@ namespace VerticesToCenter
             
             //清空追踪list
             int TrackPointListCount=m_TrackPointList.Count;
-            for (int i = TrackPointListCount - 1; i > 0; i--)
-            {
-                if (m_TrackPointList[i].NewLineFeedback != null)
-                    m_TrackPointList[i].NewLineFeedback = null;
-            }
+            //for (int i = TrackPointListCount - 1; i > 0; i--)
+            //{
+            //    if (m_TrackPointList[i].NewLineFeedback != null)
+            //        m_TrackPointList[i].NewLineFeedback = null;
+            //}
             m_TrackPointList.Clear();
             //刷新窗口图形
             //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);

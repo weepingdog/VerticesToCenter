@@ -219,7 +219,7 @@ namespace VerticesToCenter
     {
         private IPoint m_PointMoveTo;
         private double m_DistanceToCenter;
-        private INewLineFeedback m_NewLineFeedback;
+        //private INewLineFeedback m_NewLineFeedback;
 
         public IPoint PointMoveTo
         {
@@ -229,11 +229,11 @@ namespace VerticesToCenter
         {
             get { return m_DistanceToCenter; }
         }
-        public INewLineFeedback NewLineFeedback
-        {
-            get { return m_NewLineFeedback; }
-            set { m_NewLineFeedback = value; }
-        }
+        //public INewLineFeedback NewLineFeedback
+        //{
+        //    get { return m_NewLineFeedback; }
+        //    set { m_NewLineFeedback = value; }
+        //}
 
         public TrackPoint(IPoint pointStart, IPoint pointMoveTo)
         {
