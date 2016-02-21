@@ -15,8 +15,7 @@ namespace VerticesToCenter
     {
         private bool m_isMouseDown = false;
         private IPoint m_PointCentre;
-
-        //private INewLineFeedback m_LineFeedbackTest;    //跟踪线(一根，测试)
+        
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
 
         private int m_LastSelectFeatureCount = 0;
@@ -69,11 +68,7 @@ namespace VerticesToCenter
 
             //开始追踪圆
             CircleFeedBackWhenMouseDown(m_PointCentre);
-
-            //dev
-            //开始追踪测试线（一条，与圆心重合）
-            //LineFeedBackTestWhenMouseDown(m_PointCentre);
-
+            
             //开始追踪移动点
             TrackPointFeedBackWhenMouseDown(m_PointCentre);
 
@@ -89,18 +84,7 @@ namespace VerticesToCenter
                 m_CircleFeedback.Start(pointCentre);
             }
         }
-        //private void LineFeedBackTestWhenMouseDown(IPoint pointCentre)
-        //{
-        //    IPoint PointLineTestFrom = pointCentre;
-        //    PointLineTestFrom.X += 50 * GlobeStatus.MapUnit;
-        //    PointLineTestFrom.Y += 50 * GlobeStatus.MapUnit;
-        //    if (m_LineFeedbackTest == null)
-        //    {                
-        //        m_LineFeedbackTest = new NewLineFeedback();                
-        //        m_LineFeedbackTest.Display = GlobeStatus.ActiveView.ScreenDisplay;
-        //        m_LineFeedbackTest.Start(PointLineTestFrom);
-        //    }
-        //}
+        
         private void TrackPointFeedBackWhenMouseDown(IPoint pointCentre)
         {
             //正常情况下，此时TrackPointCount为0
@@ -130,11 +114,7 @@ namespace VerticesToCenter
             
             //跟踪圆
             CircleFeedBackWhenMouseMove(PointMouseMoveTo);
-
-            //dev
-            //跟踪测试线（一个测试点）
-            //LineFeedBackTestWhenMouseMove(PointMouseMoveTo);
-
+           
             //追踪多个待移动的点
             TrackPointFeedBackWhenMouseMove(m_PointCentre,PointMouseMoveTo,GlobeStatus.SelectMode);
 
@@ -155,14 +135,7 @@ namespace VerticesToCenter
             if (m_CircleFeedback != null)
                 m_CircleFeedback.MoveTo(pointMouseMoveTo);
         }
-        //private void LineFeedBackTestWhenMouseMove(IPoint pointMouseMoveTo)
-        //{
-        //    IPoint PointLineTestMoveTo = pointMouseMoveTo;
-        //    PointLineTestMoveTo.X += 50 * GlobeStatus.MapUnit;
-        //    PointLineTestMoveTo.Y += 50 * GlobeStatus.MapUnit;
-        //    if (m_LineFeedbackTest != null)
-        //        m_LineFeedbackTest.MoveTo(PointLineTestMoveTo);
-        //}
+     
         private void TrackPointFeedBackWhenMouseMove(IPoint pointCentre, IPoint pointMouseMoveTo, EnumSelectMode SelectMode)
         {
             double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseMoveTo);
@@ -265,10 +238,7 @@ namespace VerticesToCenter
             //追踪圆停止
             //（并存取圆弧，用于构造圆形；
             //实际上也可以利用圆心(鼠标按下)，圆上一点（鼠标放开）来构造圆形）
-            CircleFeedbackWhenMouseUp(PointMouseUp);
-
-            //追踪测试线停止
-            //LineFeedbackTestWhenMouseUp(PointMouseUp);
+            CircleFeedbackWhenMouseUp(PointMouseUp);            
 
             //追踪多点停止，修改几何
             TrackPointFeedBackWhenMouseUp(m_PointCentre, PointMouseUp, GlobeStatus.SelectMode);
@@ -291,14 +261,7 @@ namespace VerticesToCenter
             m_CircleFeedback = null;
             return pCircularArc;
         }
-        //private void LineFeedbackTestWhenMouseUp(IPoint pointMouseUp)
-        //{
-        //    IPoint PointLineUp = pointMouseUp;
-        //    PointLineUp.X += 50 * GlobeStatus.MapUnit;
-        //    PointLineUp.Y += 50 * GlobeStatus.MapUnit;
-        //    IPolyline pPolyline = m_LineFeedbackTest.Stop();
-        //    m_LineFeedbackTest = null;
-        //}
+       
         private void TrackPointFeedBackWhenMouseUp(IPoint pointCenter,IPoint pointMouseUp,EnumSelectMode selectMode)
         {
             //获得圆形
