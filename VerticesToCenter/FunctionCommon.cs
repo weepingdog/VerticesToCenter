@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 namespace VerticesToCenter
@@ -10,12 +11,17 @@ namespace VerticesToCenter
     public static class FunctionCommon
     {
         //从要素图层获取图层名
+        public static string GetLayerNameFromFeature(IFeature feature)
+        {
+            //Mark 手动修改层名可能会出现问题
+            return feature.Class.AliasName;
+        }
+        //从要素图层获取图层名
         public static string GetNameFromFeatureLayer(IFeatureLayer featureLayer)
         {
             //Mark 手动修改层名可能会出现问题
             return featureLayer.Name;
         }
-
         //从要素图层列表里获取指定名称要素图层,仅第一个匹配要素图层
         public static IFeatureLayer GetFeatureLayerWithName(string name, IList<IFeatureLayer> featureLayerList)
         {
@@ -75,7 +81,7 @@ namespace VerticesToCenter
         }
 
         //圆弧(线)转圆几何
-        public static IGeometry GetCircleGeometryFromCircularArc(ICircularArc pCircularArc)
+        public static IGeometry GetCircleGeometry(ICircularArc pCircularArc)
         {
             ISegmentCollection pSegmentCollection = new PolygonClass();
             object missing1 = System.Type.Missing;
@@ -88,15 +94,20 @@ namespace VerticesToCenter
         }
 
         //点+半径转圆几何
-        public static IGeometry GetCircleGeometryFromCentreRadius(IPoint pPoint, double radius)
+        public static IGeometry GetCircleGeometry(IPoint pPoint, double radius)
         {
             ICircularArc pCircularArc = new CircularArcClass();
             IConstructCircularArc pConstructCircularArc = pCircularArc as IConstructCircularArc;
             pConstructCircularArc.ConstructCircle(pPoint, radius, true);
-            return GetCircleGeometryFromCircularArc(pCircularArc);
+            return GetCircleGeometry(pCircularArc);
 
         }
 
+        public static IGeometry GetCircleGeometry(IPoint pPointCenter, IPoint pPointTo)
+        {
+            double radius = GetDistance2P(pPointCenter, pPointTo);
+            return GetCircleGeometry(pPointCenter, radius);
+        }
         //-1:无效ID; 0:首点ID; 正数:末点ID
         public static Tuple<int, int> GetPointIDPairFromFeature(
             IFeature feature, 
@@ -183,6 +194,19 @@ namespace VerticesToCenter
             IPoint item2 = bChangen ? ptn : null;
             return new Tuple<IPoint, IPoint>(item1, item2);
         }
+
+        public static double GetMapUnit(IActiveView activeView)
+        {
+            IDisplayTransformation DisplayTransformation = activeView.ScreenDisplay.DisplayTransformation;
+            IPoint Point1 = DisplayTransformation.VisibleBounds.UpperLeft;
+            IPoint Point2 = DisplayTransformation.VisibleBounds.UpperRight;
+            int x1, x2, y1, y2;
+            DisplayTransformation.FromMapPoint(Point1, out x1, out y1);
+            DisplayTransformation.FromMapPoint(Point2, out x2, out y2);
+            double pixelExtent = x2 - x1;
+            double realWorldDisplayExtent = DisplayTransformation.VisibleBounds.Width;
+            return realWorldDisplayExtent / pixelExtent;
+        }
     }
     public enum EnumSelectMode
     {
@@ -190,5 +214,48 @@ namespace VerticesToCenter
         OnlyFirst = 1,//首点 ID=0-，实际的末点
         OnlyLast = 2, //末点，ID=N-1，实际的首点
         BothFirstAndLast = 3,//两端的点
+    }
+    public class TrackPoint : IComparable
+    {
+        private IPoint m_PointMoveTo;
+        private double m_DistanceToCenter;
+        private INewLineFeedback m_NewLineFeedback;
+
+        public IPoint PointMoveTo
+        {
+            get { return m_PointMoveTo; }
+        }
+        public double DistanceToCenter
+        {
+            get { return m_DistanceToCenter; }
+        }
+        public INewLineFeedback NewLineFeedback
+        {
+            get { return m_NewLineFeedback; }
+            set { m_NewLineFeedback = value; }
+        }
+
+        public TrackPoint(IPoint pointStart, IPoint pointMoveTo)
+        {
+            SetPoint(pointStart, pointMoveTo); 
+        }
+        public void SetPoint(IPoint pointStart, IPoint pointMoveTo)
+        {
+            m_PointMoveTo = pointMoveTo;
+            m_DistanceToCenter = FunctionCommon.GetDistance2P(pointStart, pointMoveTo);
+        }
+        public int CompareTo(System.Object obj)
+        {
+            if (obj is TrackPoint)
+            {
+                TrackPoint trackpoint = obj as TrackPoint;
+                return Convert.ToInt16(this.m_DistanceToCenter - trackpoint.m_DistanceToCenter);
+            }
+            else
+            {
+                throw new ArgumentException("Object to compare to is not a Line object.");
+            }
+        }        
+
     }
 }

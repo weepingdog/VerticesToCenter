@@ -36,9 +36,9 @@ namespace VerticesToCenter
         {
             checkBox_CenterSnap.Checked = GlobeStatus.CenterSnap;
             comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.SelectMode);
-            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.RadiusChangeLimit;
-            numericUpDown_MaxRadius.Value = GlobeStatus.MaxRadius;
-            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.MaxFeaturesSelect;  
+            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.PixelRadiusChangeLimit;
+            numericUpDown_MaxRadius.Value = GlobeStatus.PixelMaxRadius;
+            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.PixelMaxFeaturesSelect;  
         }
 
         private void UpdateComboBoxSelectMode()
@@ -101,18 +101,18 @@ namespace VerticesToCenter
         {
             GlobeStatus.UpdateCenterSnap(checkBox_CenterSnap.Checked);
             GlobeStatus.UpdateSelectMode((EnumSelectMode)comboBox_SelectMode.SelectedIndex);
-            GlobeStatus.UpdateRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
-            GlobeStatus.UpdateMaxRadius((int)numericUpDown_MaxRadius.Value);
-            GlobeStatus.UpdateMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
+            GlobeStatus.UpdatePixelRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
+            GlobeStatus.UpdatePixelMaxRadius((int)numericUpDown_MaxRadius.Value);
+            GlobeStatus.UpdatePixelMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
         }
 
         private void button_SettingDefault_Click(object sender, EventArgs e)
         {
             GlobeStatus.UpdateCenterSnap(true);
             GlobeStatus.UpdateSelectMode(EnumSelectMode.MostNearOne);
-            GlobeStatus.UpdateRadiusChangeLimit(3);
-            GlobeStatus.UpdateMaxRadius(500);
-            GlobeStatus.UpdateMaxFeaturesSelect(10);
+            GlobeStatus.UpdatePixelRadiusChangeLimit(3);
+            GlobeStatus.UpdatePixelMaxRadius(500);
+            GlobeStatus.UpdatePixelMaxFeaturesSelect(10);
             SettingTapControlWhenFormStart();
         }
     }

@@ -14,12 +14,15 @@ namespace VerticesToCenter
     public class ToolVerticesToCenter : ESRI.ArcGIS.Desktop.AddIns.Tool
     {
         private bool m_isMouseDown = false;
-        private double m_LastRadius=0;
         private IPoint m_PointCentre;
 
-        private INewLineFeedback m_LineFeedbackTest;    //跟踪线(一根，测试)
+        //private INewLineFeedback m_LineFeedbackTest;    //跟踪线(一根，测试)
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
-        //private IList<INewLineFeedback> m_LineFeedbackList = new List<INewLineFeedback>();
+
+        private int m_LastSelectFeatureCount = 0;
+        private double m_LastRadius = 0;
+        private int m_LastTrackPointCount = 0;
+        private IList<TrackPoint> m_TrackPointList = new List<TrackPoint>();
 
         #region "1 System Event"
         public ToolVerticesToCenter()
@@ -57,7 +60,7 @@ namespace VerticesToCenter
                 return;
             if (GlobeStatus.CenterSnap)
             {
-                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.RadiusChangeLimit);
+                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.PixelRadiusChangeLimit);
             }
             else
             {
@@ -69,7 +72,10 @@ namespace VerticesToCenter
 
             //dev
             //开始追踪测试线（一条，与圆心重合）
-            LineFeedBackTestWhenMouseDown(m_PointCentre);
+            //LineFeedBackTestWhenMouseDown(m_PointCentre);
+
+            //开始追踪移动点
+            TrackPointFeedBackWhenMouseDown(m_PointCentre);
 
             m_isMouseDown = true;
         }
@@ -83,17 +89,25 @@ namespace VerticesToCenter
                 m_CircleFeedback.Start(pointCentre);
             }
         }
-        private void LineFeedBackTestWhenMouseDown(IPoint pointCentre)
+        //private void LineFeedBackTestWhenMouseDown(IPoint pointCentre)
+        //{
+        //    IPoint PointLineTestFrom = pointCentre;
+        //    PointLineTestFrom.X += 50 * GlobeStatus.MapUnit;
+        //    PointLineTestFrom.Y += 50 * GlobeStatus.MapUnit;
+        //    if (m_LineFeedbackTest == null)
+        //    {                
+        //        m_LineFeedbackTest = new NewLineFeedback();                
+        //        m_LineFeedbackTest.Display = GlobeStatus.ActiveView.ScreenDisplay;
+        //        m_LineFeedbackTest.Start(PointLineTestFrom);
+        //    }
+        //}
+        private void TrackPointFeedBackWhenMouseDown(IPoint pointCentre)
         {
-            IPoint PointLineTestFrom = pointCentre;
-            PointLineTestFrom.X += 50;
-            PointLineTestFrom.Y += 50;
-            if (m_LineFeedbackTest == null)
-            {                
-                m_LineFeedbackTest = new NewLineFeedback();                
-                m_LineFeedbackTest.Display = GlobeStatus.ActiveView.ScreenDisplay;
-                m_LineFeedbackTest.Start(PointLineTestFrom);
-            }
+            //正常情况下，此时TrackPointCount为0
+            int TrackPointCount = m_TrackPointList.Count;
+            for (int i = TrackPointCount-1; i >0 ; i--)
+                m_TrackPointList[i].NewLineFeedback = null;
+            m_TrackPointList.Clear();
         }
 
         protected override void OnMouseMove(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
@@ -111,30 +125,131 @@ namespace VerticesToCenter
             if (PointMouseMoveTo == null)
                 return;
 
+            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
+            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            
             //跟踪圆
             CircleFeedBackWhenMouseMove(PointMouseMoveTo);
 
             //dev
             //跟踪测试线（一个测试点）
-            LineFeedBackTestWhenMouseMove(PointMouseMoveTo);
+            //LineFeedBackTestWhenMouseMove(PointMouseMoveTo);
+
+            //追踪多个待移动的点
+            TrackPointFeedBackWhenMouseMove(m_PointCentre,PointMouseMoveTo,GlobeStatus.SelectMode);
 
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
+            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            //GlobeStatus.ActiveView.Refresh();
         }
         private void CircleFeedBackWhenMouseMove(IPoint pointMouseMoveTo)
         {
+            double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseMoveTo);
+
+            //1 选择半径太大，不响应
+            if (currentRadius > GlobeStatus.PixelMaxRadius * GlobeStatus.MapUnit)
+            {
+                //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+                return;
+            }
             if (m_CircleFeedback != null)
                 m_CircleFeedback.MoveTo(pointMouseMoveTo);
         }
-        private void LineFeedBackTestWhenMouseMove(IPoint pointMouseMoveTo)
+        //private void LineFeedBackTestWhenMouseMove(IPoint pointMouseMoveTo)
+        //{
+        //    IPoint PointLineTestMoveTo = pointMouseMoveTo;
+        //    PointLineTestMoveTo.X += 50 * GlobeStatus.MapUnit;
+        //    PointLineTestMoveTo.Y += 50 * GlobeStatus.MapUnit;
+        //    if (m_LineFeedbackTest != null)
+        //        m_LineFeedbackTest.MoveTo(PointLineTestMoveTo);
+        //}
+        private void TrackPointFeedBackWhenMouseMove(IPoint pointCentre, IPoint pointMouseMoveTo, EnumSelectMode SelectMode)
         {
-            IPoint PointLineTestMoveTo = pointMouseMoveTo;
-            PointLineTestMoveTo.X += 50;
-            PointLineTestMoveTo.Y += 50;
-            //IPoint PointLineTo = new PointClass();
-            //PointLineTo.X = pointMouseMoveTo.X + 50;
-            //PointLineTo.Y = pointMouseMoveTo.Y + 50;
-            if (m_LineFeedbackTest != null)
-                m_LineFeedbackTest.MoveTo(PointLineTestMoveTo);
+            double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseMoveTo);
+
+            //1 选择半径太大，不响应
+            if (currentRadius > GlobeStatus.PixelMaxRadius * GlobeStatus.MapUnit)
+            {
+                return;
+            }
+
+            //2 变化距离太小，不响应
+            double distanceChange = currentRadius - m_LastRadius;            
+            if (Math.Abs(distanceChange) < GlobeStatus.PixelRadiusChangeLimit * GlobeStatus.MapUnit)
+            {
+                return;
+            }
+
+            //3 开始选择
+            IGeometry pGeometry = FunctionCommon.GetCircleGeometry(m_PointCentre, currentRadius);
+            ISelectionEnvironment env = new SelectionEnvironmentClass();
+            env.CombinationMethod = esriSelectionResultEnum.esriSelectionResultNew;
+            GlobeStatus.Map.SelectByShape(pGeometry, env, false);
+            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, pGeometry.Envelope);
+            int currentSelectFeatureCount=GlobeStatus.Map.SelectionCount;
+
+            //4 选择个数过多，放弃选择
+            if (currentSelectFeatureCount > GlobeStatus.PixelMaxFeaturesSelect)
+            {
+                return;
+            }
+            if (distanceChange < 0)
+            {
+                int CurrentTrackPointCount = m_TrackPointList.Count;
+
+                for (int i = CurrentTrackPointCount - 1; i >= 0; i--)
+                {
+                    if (m_TrackPointList[i].DistanceToCenter > currentRadius)
+                    {                        
+                        m_TrackPointList[i].NewLineFeedback = null;
+                        m_TrackPointList.RemoveAt(i);                        
+                    }
+                }
+
+                if (m_LastTrackPointCount > m_TrackPointList.Count)
+                {
+                    m_LastTrackPointCount = m_TrackPointList.Count;
+                    m_LastRadius = currentRadius;
+                }
+            }
+            else
+            {
+                ISelection pSelection = GlobeStatus.Map.FeatureSelection;
+                IEnumFeatureSetup pEnumFeatureSetup = pSelection as IEnumFeatureSetup;
+                IEnumFeature pRnumFeature = pEnumFeatureSetup as IEnumFeature;
+                pRnumFeature.Reset();
+                IFeature pFeature = pRnumFeature.Next();
+                while (pFeature != null)
+                {
+                    string FeatureLayerName = FunctionCommon.GetLayerNameFromFeature(pFeature);
+                    if (!(GlobeStatus.CheckedPolyLines.Contains(FeatureLayerName)))
+                        continue;
+                    
+                    Tuple<IPoint, IPoint> PointPair=FunctionCommon.GetPointPairFromFeature(pFeature,pointCentre,currentRadius,SelectMode);
+                    if (PointPair.Item1 != null)
+                        m_TrackPointList.Add(new TrackPoint(pointCentre, PointPair.Item1));
+                    if (PointPair.Item2 != null)
+                        m_TrackPointList.Add(new TrackPoint(pointCentre, PointPair.Item2));                  
+
+                    pFeature = pRnumFeature.Next();
+                }                
+                int CurrentTrackPointCount=m_TrackPointList.Count;
+                if (m_LastTrackPointCount < CurrentTrackPointCount)
+                {
+                    for (int i = m_LastTrackPointCount; i < CurrentTrackPointCount; i++)
+                    {                        
+                        if (m_TrackPointList[i].NewLineFeedback == null)
+                        {
+                            m_TrackPointList[i].NewLineFeedback = new NewLineFeedback();
+                            m_TrackPointList[i].NewLineFeedback.Display = GlobeStatus.ActiveView.ScreenDisplay;
+                            m_TrackPointList[i].NewLineFeedback.Start(m_PointCentre);
+                            m_TrackPointList[i].NewLineFeedback.MoveTo(m_TrackPointList[i].PointMoveTo);
+                        }
+                    }
+                    m_LastRadius = currentRadius;
+                    m_LastTrackPointCount = CurrentTrackPointCount;
+                }
+            }
         }
 
         protected override void OnMouseUp(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
@@ -153,24 +268,83 @@ namespace VerticesToCenter
             CircleFeedbackWhenMouseUp(PointMouseUp);
 
             //追踪测试线停止
-            LineFeedbackTestWhenMouseUp(PointMouseUp);
+            //LineFeedbackTestWhenMouseUp(PointMouseUp);
 
+            //追踪多点停止，修改几何
+            TrackPointFeedBackWhenMouseUp(m_PointCentre, PointMouseUp, GlobeStatus.SelectMode);
+            
+            //清空追踪list
+            int TrackPointListCount=m_TrackPointList.Count;
+            for (int i = TrackPointListCount - 1; i > 0; i--)
+            {
+                if (m_TrackPointList[i].NewLineFeedback != null)
+                    m_TrackPointList[i].NewLineFeedback = null;
+            }
+            m_TrackPointList.Clear();
             //刷新窗口图形
             //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
             GlobeStatus.ActiveView.Refresh();
         }
-        private void CircleFeedbackWhenMouseUp(IPoint pointMouseUp)
+        private ICircularArc CircleFeedbackWhenMouseUp(IPoint pointMouseUp)
         {
             ICircularArc pCircularArc = m_CircleFeedback.Stop();
-            m_CircleFeedback = null; 
+            m_CircleFeedback = null;
+            return pCircularArc;
         }
-        private void LineFeedbackTestWhenMouseUp(IPoint pointMouseUp)
+        //private void LineFeedbackTestWhenMouseUp(IPoint pointMouseUp)
+        //{
+        //    IPoint PointLineUp = pointMouseUp;
+        //    PointLineUp.X += 50 * GlobeStatus.MapUnit;
+        //    PointLineUp.Y += 50 * GlobeStatus.MapUnit;
+        //    IPolyline pPolyline = m_LineFeedbackTest.Stop();
+        //    m_LineFeedbackTest = null;
+        //}
+        private void TrackPointFeedBackWhenMouseUp(IPoint pointCenter,IPoint pointMouseUp,EnumSelectMode selectMode)
         {
-            IPoint PointLineUp = pointMouseUp;
-            PointLineUp.X += 50;
-            PointLineUp.Y += 50;
-            IPolyline pPolyline = m_LineFeedbackTest.Stop();
-            m_LineFeedbackTest = null;
+            //获得圆形
+            IGeometry pGeometry = FunctionCommon.GetCircleGeometry(pointCenter, pointMouseUp);
+
+            //按圆形选择
+            GlobeStatus.Map.SelectByShape(pGeometry, null, false);
+
+            //选择个数过多，放弃选择
+            if (GlobeStatus.Map.SelectionCount > GlobeStatus.PixelMaxFeaturesSelect)
+            {
+                GlobeStatus.Map.ClearSelection();
+                m_CircleFeedback = null;
+                return;
+            }
+
+            double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseUp);
+
+            ISelection pSelection = GlobeStatus.Map.FeatureSelection;
+            IEnumFeatureSetup pEnumFeatureSetup = pSelection as IEnumFeatureSetup;
+            IEnumFeature pRnumFeature = pEnumFeatureSetup as IEnumFeature;
+            pRnumFeature.Reset();
+
+            IFeature pFeature = pRnumFeature.Next();
+            while (pFeature != null)
+            {
+                string FeatureLayerName = FunctionCommon.GetLayerNameFromFeature(pFeature);
+                if (!(GlobeStatus.CheckedPolyLines.Contains(FeatureLayerName)))
+                    continue;
+
+                //bool Changed = FeatureToCentre(pFeature.Shape, m_PointCentre, currentRadius, EnumPointEditModeVerticesToCenter.mostNearOne);
+                //if (Changed)
+                //    pFeature.Store();
+                Tuple<int, int> PointIDPair = FunctionCommon.GetPointIDPairFromFeature(pFeature, pointCenter, currentRadius, selectMode);
+
+                IPointCollection pPointCollection = pFeature.Shape as IPointCollection;    //图形几何点集
+                if (PointIDPair.Item1 ==0 || PointIDPair.Item2 > 0)
+                {
+                    if (PointIDPair.Item1 ==0)
+                        pPointCollection.UpdatePoint(0, pointCenter);
+                    if (PointIDPair.Item2 > 0)
+                        pPointCollection.UpdatePoint(PointIDPair.Item2, pointCenter);
+                    pFeature.Store();
+                }
+                pFeature = pRnumFeature.Next();
+            }
         }
         #endregion
 
