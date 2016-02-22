@@ -96,6 +96,8 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ButtonRedo.cs" />
+    <Compile Include="ButtonUndo.cs" />
     <Compile Include="Config.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Config.esriaddinx</DependentUpon>
@@ -165,6 +167,12 @@
     <EmbeddedResource Include="FormOption.resx">
       <DependentUpon>FormOption.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\ButtonUndo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Images\ButtonRedo.png" />
   </ItemGroup>
   <PropertyGroup>
     <ZipFileExtension>esriAddIn</ZipFileExtension>
