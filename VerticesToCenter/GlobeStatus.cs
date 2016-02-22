@@ -65,16 +65,10 @@ namespace VerticesToCenter
             get { return (IWorkspaceEdit)Editor.EditWorkspace; }
         }
 
-        //public static ICommandItem UndoICommandItem
-        //{
-        //    get { return FunctionCommon.GetCommandOnToolbar(ArcMap.Application, "StandardToolBar", ""); }
-        //}
         public static ICommandBar StandardToolBar
         {
             get { return FunctionCommon.GetToolbarByName(ArcMap.Application, "esriArcMapUI.StandardToolBar"); }
         }
-
-
         public static ICommandItem UndoCommand 
         {
             get
@@ -89,7 +83,6 @@ namespace VerticesToCenter
                  
             }
         }
-
         public static ICommandItem RedoCommand
         {
             get

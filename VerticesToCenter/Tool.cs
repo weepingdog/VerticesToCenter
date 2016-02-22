@@ -177,10 +177,10 @@ namespace VerticesToCenter
             //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
             GlobeStatus.ActiveView.Refresh();
 
-            ICommandItem undoCommand = GlobeStatus.UndoCommand;
-            ICommandItem redoCommand = GlobeStatus.RedoCommand;
-            undoCommand.Execute();
-            redoCommand.Execute();
+            //ICommandItem undoCommand = GlobeStatus.UndoCommand;
+            //ICommandItem redoCommand = GlobeStatus.RedoCommand;
+            //undoCommand.Execute();
+            //redoCommand.Execute();
 
             m_TrackPointList.Clear();
         }
