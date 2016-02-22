@@ -148,24 +148,24 @@ namespace VerticesToCenter
             m_PixelMaxRadius = PixelMaxRadius;
         }
 
-        private static int m_PixelMaxFeaturesSelect = 10;
-        public static int PixelMaxFeaturesSelect
+        private static int m_MaxFeaturesSelect = 20;
+        public static int MaxFeaturesSelect
         {
-            get { return m_PixelMaxFeaturesSelect; }
+            get { return m_MaxFeaturesSelect; }
         }
-        public static void UpdatePixelMaxFeaturesSelect(int pixelMaxFeaturesSelect)
+        public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
         {
-            if (pixelMaxFeaturesSelect < 1)
+            if (maxFeaturesSelect < 1)
             {
-                m_PixelMaxFeaturesSelect = 1;
+                m_MaxFeaturesSelect = 1;
                 return; 
             }
-            if (pixelMaxFeaturesSelect > 100)
+            if (maxFeaturesSelect > 100)
             {
-                m_PixelMaxFeaturesSelect = 100;
+                m_MaxFeaturesSelect = 100;
                 return;
             }
-            m_PixelMaxFeaturesSelect = pixelMaxFeaturesSelect;
+            m_MaxFeaturesSelect = maxFeaturesSelect;
         }
     }
 
