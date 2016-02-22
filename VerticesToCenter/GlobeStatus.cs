@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ESRI.ArcGIS.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using ESRI.ArcGIS.ArcMapUI;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
@@ -9,6 +11,7 @@ using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Editor;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.SystemUI;
 namespace VerticesToCenter
 {
     public static class GlobeStatus
@@ -47,11 +50,60 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        public static IWorkspace EditWorkspace
+        
+        public static IEditEvents_Event EditEvents
         {
-            get { return Editor.EditWorkspace; }
+            get { return GlobeStatus.Editor as IEditEvents_Event; }
         }
 
+        public static IWorkspace Workspace
+        {
+            get{ return Editor.EditWorkspace; }
+        }
+        public static IWorkspaceEdit WorkspaceEdit
+        {
+            get { return (IWorkspaceEdit)Editor.EditWorkspace; }
+        }
+
+        //public static ICommandItem UndoICommandItem
+        //{
+        //    get { return FunctionCommon.GetCommandOnToolbar(ArcMap.Application, "StandardToolBar", ""); }
+        //}
+        public static ICommandBar StandardToolBar
+        {
+            get { return FunctionCommon.GetToolbarByName(ArcMap.Application, "esriArcMapUI.StandardToolBar"); }
+        }
+
+
+        public static ICommandItem UndoCommand 
+        {
+            get
+            {
+                UID uid = new UIDClass();
+                //uid.Value = "{FBF8C3FB-0480-11D2-8D21-080009EE4E51}";
+                uid.Value = "esriArcMapUI.MxEditMenuItem";
+                uid.SubType = 1;
+                ICommandItem undoCommand = StandardToolBar.Find(uid, false);
+                return undoCommand;
+                
+                 
+            }
+        }
+
+        public static ICommandItem RedoCommand
+        {
+            get
+            {
+                UID uid = new UIDClass();
+                //uid.Value = "{FBF8C3FB-0480-11D2-8D21-080009EE4E51}";
+                uid.Value = "esriArcMapUI.MxEditMenuItem";
+                uid.SubType = 2;
+                ICommandItem redoCommand = StandardToolBar.Find(uid, false);
+                return redoCommand;
+            }
+        }
+
+        //public static 
         public static bool IsEditing
         {
             get
@@ -65,7 +117,6 @@ namespace VerticesToCenter
                     return false;
             }
         }
-
         
         public static double MapUnit
         {
@@ -88,9 +139,9 @@ namespace VerticesToCenter
         public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
         
         //Option--Setting
-        public static ToolSetting Setting=new ToolSetting();
-        
-    }
+        public static ToolSetting Setting=new ToolSetting();        
+    }       
+
     
     public class ToolSetting
     {

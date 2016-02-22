@@ -11,17 +11,16 @@ namespace VerticesToCenter
 {
     public class ButtonOptionVerticesToCenter : ESRI.ArcGIS.Desktop.AddIns.Button
     {
-        private IEditEvents_Event m_editEvents = GlobeStatus.Editor as IEditEvents_Event;
-
+        
         public ButtonOptionVerticesToCenter()
         {
-            m_editEvents.OnStartEditing += new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
-            m_editEvents.OnStopEditing += new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
+            GlobeStatus.EditEvents.OnStartEditing += new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
+            GlobeStatus.EditEvents.OnStopEditing += new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
         }
         ~ButtonOptionVerticesToCenter()
         {
-            m_editEvents.OnStartEditing -= new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
-            m_editEvents.OnStopEditing -= new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
+            GlobeStatus.EditEvents.OnStartEditing -= new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
+            GlobeStatus.EditEvents.OnStopEditing -= new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
         }
         public void DoWhenStartEditing()
         {
@@ -33,11 +32,13 @@ namespace VerticesToCenter
                 IList<IFeatureLayer> FeatureLayerList = FunctionCommon.GetEditablePolyLines(GlobeStatus.Map);
                 GlobeStatus.EditablePolyLines.UpdateFeatureLayerList(FeatureLayerList);
                 GlobeStatus.UpdateLastPathName(CurrentPathName);
-            }            
+            }
+            //GlobeStatus.WorkspaceEdit.EnableUndoRedo();
+            GlobeStatus.WorkspaceEdit.StartEditing(false);
         }
         public void DoWhenStopEditing(bool justbool)
         {
-    
+            GlobeStatus.WorkspaceEdit.StopEditing(true);    
         }
 
         protected override void OnClick()

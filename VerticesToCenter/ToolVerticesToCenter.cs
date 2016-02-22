@@ -9,6 +9,7 @@ using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Geometry;
 using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
+using ESRI.ArcGIS.Framework;
 
 namespace VerticesToCenter
 {
@@ -176,6 +177,11 @@ namespace VerticesToCenter
             //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
             GlobeStatus.ActiveView.Refresh();
 
+            ICommandItem undoCommand = GlobeStatus.UndoCommand;
+            ICommandItem redoCommand = GlobeStatus.RedoCommand;
+            undoCommand.Execute();
+            redoCommand.Execute();
+
             m_TrackPointList.Clear();
         }
         private void CircleFeedbackWhenMouseUp(IPoint pointMouseUp)
@@ -202,8 +208,8 @@ namespace VerticesToCenter
             IEnumFeatureSetup pEnumFeatureSetup = pSelection as IEnumFeatureSetup;
             IEnumFeature pRnumFeature = pEnumFeatureSetup as IEnumFeature;
             pRnumFeature.Reset();
-
             IFeature pFeature = pRnumFeature.Next();
+            GlobeStatus.WorkspaceEdit.StartEditOperation();
             while (pFeature != null)
             {
                 string FeatureLayerName = FunctionCommon.GetLayerNameFromFeature(pFeature);
@@ -223,11 +229,11 @@ namespace VerticesToCenter
                     if (PointIDPair.Item2 > 0)
                         pPointCollection.UpdatePoint(PointIDPair.Item2, pointCenter);
                     pFeature.Shape = (IGeometry)pPointCollection;
-                    pFeature.Store();
-                    
+                    pFeature.Store();                    
                 }
                 pFeature = pRnumFeature.Next();
             }
+            GlobeStatus.WorkspaceEdit.StopEditOperation();
         }
         #endregion
 
