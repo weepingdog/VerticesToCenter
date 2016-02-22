@@ -47,9 +47,9 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        public static IWorkspace EditWorkspace()
+        public static IWorkspace EditWorkspace
         {
-            return Editor.EditWorkspace;
+            get { return Editor.EditWorkspace; }
         }
 
         public static bool IsEditing
@@ -66,6 +66,7 @@ namespace VerticesToCenter
             }
         }
 
+        
         public static double MapUnit
         {
             get { return FunctionCommon.GetMapUnit(ActiveView); }
@@ -85,34 +86,59 @@ namespace VerticesToCenter
         //Option--SelectLayers
         public static PolyLinesVTC EditablePolyLines = new PolyLinesVTC();
         public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
-
+        
         //Option--Setting
-        private static bool m_CenterSnap = true;
-        public static bool CenterSnap
+        public static ToolSetting Setting=new ToolSetting();
+        
+    }
+    
+    public class ToolSetting
+    {
+
+        public ToolSetting()
+        {
+            //默认构造函数
+            m_CenterSnap = true;
+            m_SelectMod = EnumSelectMode.MostNearOne;
+            m_PixelRadiusChangeLimit = 1;
+            m_PixelMaxRadius = 200;
+            m_MaxFeaturesSelect = 20;
+ 
+        }
+        public ToolSetting(ToolSetting toolSetting)
+        {
+            m_CenterSnap = toolSetting.CenterSnap;
+            m_SelectMod = toolSetting.SelectMode;
+            m_PixelRadiusChangeLimit = toolSetting.PixelRadiusChangeLimit;
+            m_PixelMaxRadius = toolSetting.PixelMaxRadius;
+            m_MaxFeaturesSelect = toolSetting.MaxFeaturesSelect; 
+        }
+        private bool m_CenterSnap;
+        public bool CenterSnap
         {
             get { return m_CenterSnap; }
         }
-        public static void UpdateCenterSnap(bool centerSnap)
+        public void UpdateCenterSnap(bool centerSnap)
         {
-            m_CenterSnap = centerSnap; 
+            m_CenterSnap = centerSnap;
         }
 
-        private static EnumSelectMode m_SelectMod = EnumSelectMode.MostNearOne;
-        public static EnumSelectMode SelectMode
+        private EnumSelectMode m_SelectMod;
+        public EnumSelectMode SelectMode
         {
             get { return m_SelectMod; }
         }
-        public static void UpdateSelectMode(EnumSelectMode selectMod)
+        public void UpdateSelectMode(EnumSelectMode selectMod)
         {
             m_SelectMod = selectMod;
         }
 
-        private static int m_PixelRadiusChangeLimit = 1;
-        public static int PixelRadiusChangeLimit
+        private int m_PixelRadiusChangeLimit;
+        public int PixelRadiusChangeLimit
         {
             get { return m_PixelRadiusChangeLimit; }
         }
-        public static void UpdatePixelRadiusChangeLimit(int pixelRadiusChangeLimit)
+        public void UpdatePixelRadiusChangeLimit(int pixelRadiusChangeLimit)
         {
             if (pixelRadiusChangeLimit < 1)
             {
@@ -125,15 +151,15 @@ namespace VerticesToCenter
                 return;
             }
             m_PixelRadiusChangeLimit = pixelRadiusChangeLimit;
-            
+
         }
 
-        private static int m_PixelMaxRadius = 200;
-        public static int PixelMaxRadius
+        private int m_PixelMaxRadius;
+        public int PixelMaxRadius
         {
             get { return m_PixelMaxRadius; }
         }
-        public static void UpdatePixelMaxRadius(int PixelMaxRadius)
+        public void UpdatePixelMaxRadius(int PixelMaxRadius)
         {
             if (PixelMaxRadius < 2)
             {
@@ -148,17 +174,17 @@ namespace VerticesToCenter
             m_PixelMaxRadius = PixelMaxRadius;
         }
 
-        private static int m_MaxFeaturesSelect = 20;
-        public static int MaxFeaturesSelect
+        private int m_MaxFeaturesSelect;
+        public int MaxFeaturesSelect
         {
             get { return m_MaxFeaturesSelect; }
         }
-        public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
+        public void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
         {
             if (maxFeaturesSelect < 1)
             {
                 m_MaxFeaturesSelect = 1;
-                return; 
+                return;
             }
             if (maxFeaturesSelect > 100)
             {
@@ -167,6 +193,7 @@ namespace VerticesToCenter
             }
             m_MaxFeaturesSelect = maxFeaturesSelect;
         }
+ 
     }
 
 }

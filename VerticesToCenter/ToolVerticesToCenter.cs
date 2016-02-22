@@ -58,9 +58,9 @@ namespace VerticesToCenter
             if (PointMouseDown == null)
                 return;
 
-            if (GlobeStatus.CenterSnap) //若开启了圆心捕捉
+            if (GlobeStatus.Setting.CenterSnap) //若开启了圆心捕捉
             {
-                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.PixelRadiusChangeLimit);
+                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.Setting.PixelRadiusChangeLimit);
             }
             else
             {
@@ -98,7 +98,7 @@ namespace VerticesToCenter
 
             if (!m_isMouseDown) //鼠标未按下无仅提示捕捉圆心点(在开启捕捉情况下)
             {
-                if (GlobeStatus.CenterSnap)
+                if (GlobeStatus.Setting.CenterSnap)
                     PointSnapWhenMouseMove();
                 return; 
             }
@@ -110,7 +110,7 @@ namespace VerticesToCenter
             CircleFeedBackWhenMouseMove(m_PointMouseMoveTo);
            
             //追踪多个待移动的点
-            FeatureSelectWhenMouseMove(m_PointCentre,m_PointMouseMoveTo,GlobeStatus.SelectMode);
+            FeatureSelectWhenMouseMove(m_PointCentre, m_PointMouseMoveTo, GlobeStatus.Setting.SelectMode);
 
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
             GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
@@ -121,7 +121,7 @@ namespace VerticesToCenter
             double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseMoveTo);
 
             //1 选择半径太大，不响应
-            if (currentRadius > GlobeStatus.PixelMaxRadius * GlobeStatus.MapUnit)
+            if (currentRadius > GlobeStatus.Setting.PixelMaxRadius * GlobeStatus.MapUnit)
             {
                 //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
                 return;
@@ -134,14 +134,14 @@ namespace VerticesToCenter
             double currentRadius = FunctionCommon.GetDistance2P(m_PointCentre, pointMouseMoveTo);
 
             //1 选择半径太大，不响应
-            if (currentRadius > GlobeStatus.PixelMaxRadius * GlobeStatus.MapUnit)
+            if (currentRadius > GlobeStatus.Setting.PixelMaxRadius * GlobeStatus.MapUnit)
             {
                 return;
             }
 
             //2 变化距离太小，不响应
-            double distanceChange = currentRadius - m_LastRadius;            
-            if (Math.Abs(distanceChange) < GlobeStatus.PixelRadiusChangeLimit * GlobeStatus.MapUnit)
+            double distanceChange = currentRadius - m_LastRadius;
+            if (Math.Abs(distanceChange) < GlobeStatus.Setting.PixelRadiusChangeLimit * GlobeStatus.MapUnit)
             {
                 return;
             }
@@ -170,7 +170,7 @@ namespace VerticesToCenter
             CircleFeedbackWhenMouseUp(m_PointMouseMoveTo);            
 
             //追踪多点停止，修改几何
-            FeatureSelectWhenMouseUp(m_PointCentre, m_PointMouseMoveTo, GlobeStatus.SelectMode);
+            FeatureSelectWhenMouseUp(m_PointCentre, m_PointMouseMoveTo, GlobeStatus.Setting.SelectMode);
             
             //刷新窗口图形
             //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
@@ -189,7 +189,7 @@ namespace VerticesToCenter
         private void FeatureSelectWhenMouseUp(IPoint pointCenter, IPoint pointMouseUp, EnumSelectMode selectMode)
         {        
             //选择个数过多，放弃选择
-            if (GlobeStatus.Map.SelectionCount > GlobeStatus.MaxFeaturesSelect)
+            if (GlobeStatus.Map.SelectionCount > GlobeStatus.Setting.MaxFeaturesSelect)
             {
                 //GlobeStatus.Map.ClearSelection();
                 MessageBox.Show("Too many features selected");
@@ -224,6 +224,7 @@ namespace VerticesToCenter
                         pPointCollection.UpdatePoint(PointIDPair.Item2, pointCenter);
                     pFeature.Shape = (IGeometry)pPointCollection;
                     pFeature.Store();
+                    
                 }
                 pFeature = pRnumFeature.Next();
             }
