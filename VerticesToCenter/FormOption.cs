@@ -10,9 +10,9 @@ using ESRI.ArcGIS.Carto;
 
 namespace VerticesToCenter
 {
-    public partial class FormOptionVerticesToCenter : Form
+    public partial class FormOption : Form
     {
-        public FormOptionVerticesToCenter()
+        public FormOption()
         {
             InitializeComponent();
             UpdateComboBoxSelectMode();
@@ -34,11 +34,11 @@ namespace VerticesToCenter
 
         private void SettingTapControlWhenFormStart()
         {
-            checkBox_CenterSnap.Checked = GlobeStatus.CenterSnap;
-            comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.SelectMode);
-            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.PixelRadiusChangeLimit;
-            numericUpDown_MaxRadius.Value = GlobeStatus.PixelMaxRadius;
-            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.MaxFeaturesSelect;  
+            checkBox_CenterSnap.Checked = GlobeStatus.Setting.CenterSnap;
+            comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.Setting.SelectMode);
+            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.Setting.PixelRadiusChangeLimit;
+            numericUpDown_MaxRadius.Value = GlobeStatus.Setting.PixelMaxRadius;
+            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.Setting.MaxFeaturesSelect;  
         }
 
         private void UpdateComboBoxSelectMode()
@@ -99,20 +99,20 @@ namespace VerticesToCenter
 
         private void SettingTabControlWhenConfirm()
         {
-            GlobeStatus.UpdateCenterSnap(checkBox_CenterSnap.Checked);
-            GlobeStatus.UpdateSelectMode((EnumSelectMode)comboBox_SelectMode.SelectedIndex);
-            GlobeStatus.UpdatePixelRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
-            GlobeStatus.UpdatePixelMaxRadius((int)numericUpDown_MaxRadius.Value);
-            GlobeStatus.UpdateMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
+            GlobeStatus.Setting.UpdateCenterSnap(checkBox_CenterSnap.Checked);
+            GlobeStatus.Setting.UpdateSelectMode((EnumSelectMode)comboBox_SelectMode.SelectedIndex);
+            GlobeStatus.Setting.UpdatePixelRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
+            GlobeStatus.Setting.UpdatePixelMaxRadius((int)numericUpDown_MaxRadius.Value);
+            GlobeStatus.Setting.UpdateMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
         }
 
         private void button_SettingDefault_Click(object sender, EventArgs e)
         {
-            GlobeStatus.UpdateCenterSnap(true);
-            GlobeStatus.UpdateSelectMode(EnumSelectMode.MostNearOne);
-            GlobeStatus.UpdatePixelRadiusChangeLimit(1);
-            GlobeStatus.UpdatePixelMaxRadius(200);
-            GlobeStatus.UpdateMaxFeaturesSelect(20);
+            GlobeStatus.Setting.UpdateCenterSnap(true);
+            GlobeStatus.Setting.UpdateSelectMode(EnumSelectMode.MostNearOne);
+            GlobeStatus.Setting.UpdatePixelRadiusChangeLimit(1);
+            GlobeStatus.Setting.UpdatePixelMaxRadius(200);
+            GlobeStatus.Setting.UpdateMaxFeaturesSelect(20);
             SettingTapControlWhenFormStart();
         }
     }

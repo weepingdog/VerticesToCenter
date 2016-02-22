@@ -1,7 +1,9 @@
-﻿using System;
+﻿using ESRI.ArcGIS.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Forms;
 using ESRI.ArcGIS.ArcMapUI;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Controls;
@@ -9,6 +11,7 @@ using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Editor;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.esriSystem;
+using ESRI.ArcGIS.SystemUI;
 namespace VerticesToCenter
 {
     public static class GlobeStatus
@@ -47,11 +50,53 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        public static IWorkspace EditWorkspace()
+        
+        public static IEditEvents_Event EditEvents
         {
-            return Editor.EditWorkspace;
+            get { return GlobeStatus.Editor as IEditEvents_Event; }
         }
 
+        public static IWorkspace Workspace
+        {
+            get{ return Editor.EditWorkspace; }
+        }
+        public static IWorkspaceEdit WorkspaceEdit
+        {
+            get { return (IWorkspaceEdit)Editor.EditWorkspace; }
+        }
+
+        public static ICommandBar StandardToolBar
+        {
+            get { return FunctionCommon.GetToolbarByName(ArcMap.Application, "esriArcMapUI.StandardToolBar"); }
+        }
+        public static ICommandItem UndoCommand 
+        {
+            get
+            {
+                UID uid = new UIDClass();
+                //uid.Value = "{FBF8C3FB-0480-11D2-8D21-080009EE4E51}";
+                uid.Value = "esriArcMapUI.MxEditMenuItem";
+                uid.SubType = 1;
+                ICommandItem undoCommand = StandardToolBar.Find(uid, false);
+                return undoCommand;
+                
+                 
+            }
+        }
+        public static ICommandItem RedoCommand
+        {
+            get
+            {
+                UID uid = new UIDClass();
+                //uid.Value = "{FBF8C3FB-0480-11D2-8D21-080009EE4E51}";
+                uid.Value = "esriArcMapUI.MxEditMenuItem";
+                uid.SubType = 2;
+                ICommandItem redoCommand = StandardToolBar.Find(uid, false);
+                return redoCommand;
+            }
+        }
+
+        //public static 
         public static bool IsEditing
         {
             get
@@ -65,7 +110,7 @@ namespace VerticesToCenter
                     return false;
             }
         }
-
+        
         public static double MapUnit
         {
             get { return FunctionCommon.GetMapUnit(ActiveView); }
@@ -85,34 +130,59 @@ namespace VerticesToCenter
         //Option--SelectLayers
         public static PolyLinesVTC EditablePolyLines = new PolyLinesVTC();
         public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
-
+        
         //Option--Setting
-        private static bool m_CenterSnap = true;
-        public static bool CenterSnap
+        public static ToolSetting Setting=new ToolSetting();        
+    }       
+
+    
+    public class ToolSetting
+    {
+
+        public ToolSetting()
+        {
+            //默认构造函数
+            m_CenterSnap = true;
+            m_SelectMod = EnumSelectMode.MostNearOne;
+            m_PixelRadiusChangeLimit = 1;
+            m_PixelMaxRadius = 200;
+            m_MaxFeaturesSelect = 20;
+ 
+        }
+        public ToolSetting(ToolSetting toolSetting)
+        {
+            m_CenterSnap = toolSetting.CenterSnap;
+            m_SelectMod = toolSetting.SelectMode;
+            m_PixelRadiusChangeLimit = toolSetting.PixelRadiusChangeLimit;
+            m_PixelMaxRadius = toolSetting.PixelMaxRadius;
+            m_MaxFeaturesSelect = toolSetting.MaxFeaturesSelect; 
+        }
+        private bool m_CenterSnap;
+        public bool CenterSnap
         {
             get { return m_CenterSnap; }
         }
-        public static void UpdateCenterSnap(bool centerSnap)
+        public void UpdateCenterSnap(bool centerSnap)
         {
-            m_CenterSnap = centerSnap; 
+            m_CenterSnap = centerSnap;
         }
 
-        private static EnumSelectMode m_SelectMod = EnumSelectMode.MostNearOne;
-        public static EnumSelectMode SelectMode
+        private EnumSelectMode m_SelectMod;
+        public EnumSelectMode SelectMode
         {
             get { return m_SelectMod; }
         }
-        public static void UpdateSelectMode(EnumSelectMode selectMod)
+        public void UpdateSelectMode(EnumSelectMode selectMod)
         {
             m_SelectMod = selectMod;
         }
 
-        private static int m_PixelRadiusChangeLimit = 1;
-        public static int PixelRadiusChangeLimit
+        private int m_PixelRadiusChangeLimit;
+        public int PixelRadiusChangeLimit
         {
             get { return m_PixelRadiusChangeLimit; }
         }
-        public static void UpdatePixelRadiusChangeLimit(int pixelRadiusChangeLimit)
+        public void UpdatePixelRadiusChangeLimit(int pixelRadiusChangeLimit)
         {
             if (pixelRadiusChangeLimit < 1)
             {
@@ -125,15 +195,15 @@ namespace VerticesToCenter
                 return;
             }
             m_PixelRadiusChangeLimit = pixelRadiusChangeLimit;
-            
+
         }
 
-        private static int m_PixelMaxRadius = 200;
-        public static int PixelMaxRadius
+        private int m_PixelMaxRadius;
+        public int PixelMaxRadius
         {
             get { return m_PixelMaxRadius; }
         }
-        public static void UpdatePixelMaxRadius(int PixelMaxRadius)
+        public void UpdatePixelMaxRadius(int PixelMaxRadius)
         {
             if (PixelMaxRadius < 2)
             {
@@ -148,17 +218,17 @@ namespace VerticesToCenter
             m_PixelMaxRadius = PixelMaxRadius;
         }
 
-        private static int m_MaxFeaturesSelect = 20;
-        public static int MaxFeaturesSelect
+        private int m_MaxFeaturesSelect;
+        public int MaxFeaturesSelect
         {
             get { return m_MaxFeaturesSelect; }
         }
-        public static void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
+        public void UpdateMaxFeaturesSelect(int maxFeaturesSelect)
         {
             if (maxFeaturesSelect < 1)
             {
                 m_MaxFeaturesSelect = 1;
-                return; 
+                return;
             }
             if (maxFeaturesSelect > 100)
             {
@@ -167,6 +237,7 @@ namespace VerticesToCenter
             }
             m_MaxFeaturesSelect = maxFeaturesSelect;
         }
+ 
     }
 
 }

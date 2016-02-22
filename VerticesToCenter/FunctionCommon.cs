@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ESRI.ArcGIS.esriSystem;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ESRI.ArcGIS.Carto;
 using ESRI.ArcGIS.Display;
+using ESRI.ArcGIS.Framework;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 namespace VerticesToCenter
@@ -207,6 +209,67 @@ namespace VerticesToCenter
             double realWorldDisplayExtent = DisplayTransformation.VisibleBounds.Width;
             return realWorldDisplayExtent / pixelExtent;
         }
+
+
+        #region "Get Toolbar by Name"
+
+        ///<summary>Obtain a toolbar by specifying it's name.</summary>
+        ///  
+        ///<param name="application">An IApplication interface.</param>
+        ///<param name="toolbarName">A System.String that is the name of the toolbar to return. Example: "esriArcMapUI.StandardToolBar"</param>
+        ///   
+        ///<returns>An ICommandBar interface.</returns>
+        ///  
+        ///<remarks>Refer to the EDN document http://edndoc.esri.com/arcobjects/9.1/default.asp?URL=/arcobjects/9.1/ArcGISDevHelp/TechnicalDocuments/Guids/ArcMapIds.htm for a listing of available CLSID's and ProgID's that can be used as the toolbarName parameter.</remarks>
+        public static ICommandBar GetToolbarByName(IApplication application, System.String toolbarName)
+        {
+            ICommandBars commandBars = application.Document.CommandBars;
+            ESRI.ArcGIS.esriSystem.UID barID = new ESRI.ArcGIS.esriSystem.UIDClass();
+            barID.Value = toolbarName; // Example: "esriArcMapUI.StandardToolBar"
+            ICommandItem commandItem = commandBars.Find(barID, false, false);
+            if (commandItem != null && commandItem.Type == esriCommandTypes.esriCmdTypeToolbar)
+            {
+                return (ICommandBar)commandItem;
+            }
+            else
+                return null;
+        }
+        #endregion
+
+
+        #region "Get Command on Toolbar by Names"
+
+        ///<summary>Find a command item particularly on a toolbar.</summary>
+        ///  
+        ///<param name="application">An IApplication interface.</param>
+        ///<param name="toolbarName">A System.String that is the name of the toolbar to return. Example: "esriArcMapUI.StandardToolBar"</param>
+        ///<param name="commandName">A System.String that is the name of the command to return. Example: "esriFramework.HelpContentsCommand"</param>
+        ///   
+        ///<returns>An ICommandItem interface.</returns>
+        ///  
+        ///<remarks>Refer to the EDN document http://edndoc.esri.com/arcobjects/9.1/default.asp?URL=/arcobjects/9.1/ArcGISDevHelp/TechnicalDocuments/Guids/ArcMapIds.htm for a listing of available CLSID's and ProgID's that can be used as the toolbarName and commandName parameters.</remarks>
+        public static ICommandItem GetCommandOnToolbar(IApplication application, System.String toolbarName, System.String commandName)
+        {
+            ICommandBars commandBars = application.Document.CommandBars;
+            ESRI.ArcGIS.esriSystem.UID barID = new ESRI.ArcGIS.esriSystem.UIDClass();
+            barID.Value = toolbarName; // Example: "esriArcMapUI.StandardToolBar"
+            ICommandItem barItem = commandBars.Find(barID, false, false);
+
+            if (barItem != null && barItem.Type == esriCommandTypes.esriCmdTypeToolbar)
+            {
+                ICommandBar commandBar = (ICommandBar)barItem;
+                ESRI.ArcGIS.esriSystem.UID commandID = new ESRI.ArcGIS.esriSystem.UIDClass();
+                commandID.Value = commandName; // Example: "esriArcMapUI.AddDataCommand"
+                return commandBar.Find(commandID, false);
+            }
+            else
+                return null;
+        }
+        #endregion
+
+
+              
+
     }
     public enum EnumSelectMode
     {
