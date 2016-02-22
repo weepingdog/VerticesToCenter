@@ -9,15 +9,15 @@ using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.ArcMapUI;
 namespace VerticesToCenter
 {
-    public class ButtonOptionVerticesToCenter : ESRI.ArcGIS.Desktop.AddIns.Button
+    public class ButtonOption : ESRI.ArcGIS.Desktop.AddIns.Button
     {
         
-        public ButtonOptionVerticesToCenter()
+        public ButtonOption()
         {
             GlobeStatus.EditEvents.OnStartEditing += new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
             GlobeStatus.EditEvents.OnStopEditing += new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
         }
-        ~ButtonOptionVerticesToCenter()
+        ~ButtonOption()
         {
             GlobeStatus.EditEvents.OnStartEditing -= new IEditEvents_OnStartEditingEventHandler(DoWhenStartEditing);
             GlobeStatus.EditEvents.OnStopEditing -= new IEditEvents_OnStopEditingEventHandler(DoWhenStopEditing);
@@ -46,7 +46,7 @@ namespace VerticesToCenter
             //
             //  TODO: Sample code showing how to access button host
             //
-            FormOptionVerticesToCenter formVTCOption = new FormOptionVerticesToCenter();
+            FormOption formVTCOption = new FormOption();
             formVTCOption.Show();
         }
         protected override void OnUpdate()

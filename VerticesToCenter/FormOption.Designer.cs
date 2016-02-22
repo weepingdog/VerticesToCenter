@@ -1,6 +1,6 @@
 ﻿namespace VerticesToCenter
 {
-    partial class FormOptionVerticesToCenter
+    partial class FormOption
     {
         /// <summary>
         /// Required designer variable.

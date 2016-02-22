@@ -13,7 +13,7 @@ using ESRI.ArcGIS.Framework;
 
 namespace VerticesToCenter
 {
-    public class ToolVerticesToCenter : ESRI.ArcGIS.Desktop.AddIns.Tool
+    public class Tool : ESRI.ArcGIS.Desktop.AddIns.Tool
     {
         private bool m_isMouseDown = false;
         private IPoint m_PointCentre;
@@ -26,7 +26,7 @@ namespace VerticesToCenter
         private IList<TrackPoint> m_TrackPointList = new List<TrackPoint>();
 
         #region "1 System Event"
-        public ToolVerticesToCenter()
+        public Tool()
         {
         }
 

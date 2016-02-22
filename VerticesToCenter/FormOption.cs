@@ -10,9 +10,9 @@ using ESRI.ArcGIS.Carto;
 
 namespace VerticesToCenter
 {
-    public partial class FormOptionVerticesToCenter : Form
+    public partial class FormOption : Form
     {
-        public FormOptionVerticesToCenter()
+        public FormOption()
         {
             InitializeComponent();
             UpdateComboBoxSelectMode();
