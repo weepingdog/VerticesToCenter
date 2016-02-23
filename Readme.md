@@ -1,2 +1,6 @@
-1 要素名是通过AliasName获得的，存在问题
-2 开启中心捕捉时候，会清空Map上的所有图形对象
+1 get layername function
+  some bugs
+ public static string GetLayerNameFromFeature(IFeature feature)
+
+2 public static void RemovePointMarker(IMap map)
+graphicsContainer.DeleteAllElements(); //may has bugs
