@@ -7,7 +7,7 @@ using ESRI.ArcGIS.Geodatabase;
 namespace VerticesToCenter
 {
     //public class PolyLinesVTC:IList<IFeatureLayer>
-    public class PolyLinesVTC
+    public class PolyLines
     {
         private IList<IFeatureLayer> m_FeatureLayerList;
         public IList<IFeatureLayer> FeatureLayerList
@@ -15,11 +15,11 @@ namespace VerticesToCenter
             get { return m_FeatureLayerList; }
         }
 
-        public PolyLinesVTC()
+        public PolyLines()
         {
             m_FeatureLayerList = new List<IFeatureLayer>(); 
         }
-        public PolyLinesVTC(IList<IFeatureLayer> featureLayerList)
+        public PolyLines(IList<IFeatureLayer> featureLayerList)
         {
             m_FeatureLayerList = featureLayerList;
         }
@@ -49,6 +49,12 @@ namespace VerticesToCenter
         public void Clear()
         {
             m_FeatureLayerList.Clear();
+        }
+
+        public IFeatureLayer this[int index]
+        {
+            get { return m_FeatureLayerList[index]; }
+            set { m_FeatureLayerList[index] = value; }
         }
 
         public bool Contains(IFeatureLayer featureLayer)

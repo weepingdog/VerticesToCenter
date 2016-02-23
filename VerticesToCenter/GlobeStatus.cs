@@ -50,7 +50,20 @@ namespace VerticesToCenter
                 return editor;
             }
         }
-        
+
+        //private static AxMapControl m_axMapControl;
+        //public static AxMapControl axMapControl
+        //{
+        //    get 
+        //    {
+        //        return m_axMapControl;
+        //    }
+        //}
+        //public static void UpdateAxMapControl(AxMapControl amc)
+        //{
+        //    m_axMapControl=amc;
+        //}
+
         public static IEditEvents_Event EditEvents
         {
             get { return GlobeStatus.Editor as IEditEvents_Event; }
@@ -78,9 +91,7 @@ namespace VerticesToCenter
                 uid.Value = "esriArcMapUI.MxEditMenuItem";
                 uid.SubType = 1;
                 ICommandItem undoCommand = StandardToolBar.Find(uid, false);
-                return undoCommand;
-                
-                 
+                return undoCommand;                 
             }
         }
         public static ICommandItem RedoCommand
@@ -96,7 +107,7 @@ namespace VerticesToCenter
             }
         }
 
-        //public static 
+        //public static
         public static bool IsEditing
         {
             get
@@ -128,8 +139,8 @@ namespace VerticesToCenter
         }
 
         //Option--SelectLayers
-        public static PolyLinesVTC EditablePolyLines = new PolyLinesVTC();
-        public static PolyLinesVTC CheckedPolyLines = new PolyLinesVTC();
+        public static PolyLines EditablePolyLines = new PolyLines();
+        public static PolyLines CheckedPolyLines = new PolyLines();
         
         //Option--Setting
         public static ToolSetting Setting=new ToolSetting();        
