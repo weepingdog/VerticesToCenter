@@ -1,6 +1,7 @@
 ﻿using ESRI.ArcGIS.esriSystem;
 using System;
 using System.Collections.Generic;
+using System.Windows.Forms;
 using System.Linq;
 using System.Text;
 using ESRI.ArcGIS.Carto;
@@ -210,7 +211,6 @@ namespace VerticesToCenter
             return realWorldDisplayExtent / pixelExtent;
         }
 
-
         #region "Get Toolbar by Name"
 
         ///<summary>Obtain a toolbar by specifying it's name.</summary>
@@ -235,7 +235,6 @@ namespace VerticesToCenter
                 return null;
         }
         #endregion
-
 
         #region "Get Command on Toolbar by Names"
 
@@ -267,9 +266,145 @@ namespace VerticesToCenter
         }
         #endregion
 
+        public static IEnvelope GetEnvlope(IActiveView activeView, IPoint queryPoint, double envlopeDistance)
+        {
+            IEnvelope envelope = new EnvelopeClass();
+            envelope.CenterAt(queryPoint);
+            envelope.Width = 2 * envlopeDistance;
+            envelope.Height = 2 * envlopeDistance;
+            return envelope;           
+        }
 
-              
+        public static IPoint Snapping(IActiveView activeView, esriGeometryHitPartType geometryHitPartType, IPoint queryPoint, double searchRaius)
+        {
+            IPoint vetexPoint = null;
+            IPoint hitPoint = new PointClass();
+            IHitTest hitTest = null;
+            IPointCollection pointCollection = new MultipointClass();
+            IProximityOperator proximityOperator = null;
+            double hitDistance = 0;
+            int hitPartIndex = 0, hitSegmentIndex = 0;
+            Boolean rightSide = false;
+            IFeatureCache2 featureCache = new FeatureCacheClass();
+            featureCache.Initialize(queryPoint, searchRaius);  //初始化缓存
+            for (int i = 0; i < activeView.FocusMap.LayerCount; i++)
+            {
+                //只有点、线、面并且可视的图层才加入缓存
+                IFeatureLayer featLayer = (IFeatureLayer)activeView.FocusMap.get_Layer(i);
+                if (featLayer != null && featLayer.Visible == true &&
+                    (featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPolyline ||
+                    featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPolygon ||
+                    featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPoint))                
+                {
+                    featureCache.AddFeatures(featLayer.FeatureClass, null);
+                    for (int j = 0; j < featureCache.Count; j++)
+                    {
+                        IFeature feature = featureCache.get_Feature(j);
+                        hitTest = (IHitTest)feature.Shape;
+                        //捕捉节点，另外可以设置esriGeometryHitPartType，捕捉边线点，中间点等。
+                        if (hitTest.HitTest(queryPoint, searchRaius, geometryHitPartType, hitPoint, ref hitDistance, ref hitPartIndex, ref hitSegmentIndex, ref rightSide))
+                        {
+                            object obj = Type.Missing;
+                            pointCollection.AddPoint(hitPoint, ref obj, ref obj);
+                            break;
+                        }
+                    }
+                }
+            }
+            proximityOperator = (IProximityOperator)queryPoint;
+            double minDistance = 0, distance = 0;
+            for (int i = 0; i < pointCollection.PointCount; i++)
+            {
+                IPoint tmpPoint = pointCollection.get_Point(i);
+                distance = proximityOperator.ReturnDistance(tmpPoint);
+                if (i == 0)
+                {
+                    minDistance = distance;
+                    vetexPoint = tmpPoint;
+                }
+                else
+                {
+                    if (distance < minDistance)
+                    {
+                        minDistance = distance;
+                        vetexPoint = tmpPoint;
+                    }
+                }
+            }
+            return vetexPoint;            
+        }
 
+        public static int GetIndexFromSnapKeyDown(Keys key)
+        {
+            switch(key)
+            {
+                case Keys.ControlKey:
+                    return 0;
+                case Keys.LControlKey:
+                    return 1;
+                case Keys.RControlKey:
+                    return 2;
+                case Keys.ShiftKey:
+                    return 3;
+                case Keys.LShiftKey:
+                    return 4;
+                case Keys.RShiftKey:
+                    return 5;
+                default:
+                    return 0;
+            }
+        }
+
+        public static Keys GetSnapKeyDownFromIndex(int index)
+        {
+            switch (index)
+            {
+                case 0:
+                    return Keys.ControlKey;
+                case 1:
+                    return Keys.LControlKey;
+                case 2:
+                    return Keys.RControlKey;
+                case 3:
+                    return Keys.ShiftKey;
+                case 4:
+                    return Keys.LShiftKey;
+                case 5:
+                    return Keys.RShiftKey;
+                default:
+                    return Keys.ControlKey;
+            }
+        }
+
+        public static IElement DrawPointMarker(IMap map, IPoint point)
+        {
+            IMarkerElement markerElement = new MarkerElementClass();
+            ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbolClass();
+            IRgbColor color = new RgbColorClass();
+            color.Red = 200;
+            color.Green = 100;
+            color.Blue = 100;
+            simpleMarkerSymbol.Color = color as IColor;
+            simpleMarkerSymbol.Style = esriSimpleMarkerStyle.esriSMSSquare;            
+            markerElement.Symbol = simpleMarkerSymbol;
+
+            IElement element = markerElement as IElement;
+            element.Geometry = point;
+
+            IGraphicsContainer graphicsContainer = map as IGraphicsContainer;
+            graphicsContainer.AddElement(element, 0);
+            IActiveView activeView = map as IActiveView;
+            activeView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            return element;
+        }
+
+        public static void RemovePointMarker(IMap map)
+        { 
+            IGraphicsContainer graphicsContainer = map as IGraphicsContainer;
+            graphicsContainer.DeleteAllElements();
+            IActiveView activeView = map as IActiveView;
+            activeView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);        
+        }
     }
     public enum EnumSelectMode
     {

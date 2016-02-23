@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.IO;
 using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.Editor;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.ArcMapUI;
@@ -48,6 +49,15 @@ namespace VerticesToCenter
             //
             FormOption formVTCOption = new FormOption();
             formVTCOption.Show();
+            //IntPtr pHandle =new IntPtr(GlobeStatus.ActiveView.ScreenDisplay.hWnd);
+            ////Form MainForm = System.Windows.Forms.Form.FromHandle(pHandle).FindForm(); 
+            //Control control = System.Windows.Forms.Form.FromHandle(pHandle);
+            //AxMapControl axMapControl = control as AxMapControl;
+
+            //IHookHelper m_hookHelper;
+            //IntPtr intPtr = new IntPtr(GlobeStatus.ActiveView.ScreenDisplay.hWnd);
+            //Control parentControl = Control.FromHandle(intPtr);
+            //Control parentControl2 = Control.FromChildHandle(intPtr);            
         }
         protected override void OnUpdate()
         {
@@ -55,5 +65,4 @@ namespace VerticesToCenter
             Enabled = (ArcMap.Application != null&&GlobeStatus.IsEditing);
         }
     }
-
 }

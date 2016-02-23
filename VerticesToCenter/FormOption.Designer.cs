@@ -35,6 +35,8 @@
             this.tabPage_SelectLayers = new System.Windows.Forms.TabPage();
             this.button_SelectLayers_Confirm = new System.Windows.Forms.Button();
             this.tabPage_Setting = new System.Windows.Forms.TabPage();
+            this.comboBox_KeySnapSwitch = new System.Windows.Forms.ComboBox();
+            this.label_KeySnapSwitch = new System.Windows.Forms.Label();
             this.button_SettingDefault = new System.Windows.Forms.Button();
             this.button_Setting_Confirm = new System.Windows.Forms.Button();
             this.numericUpDown_MaxFeaturesSelect = new System.Windows.Forms.NumericUpDown();
@@ -48,6 +50,8 @@
             this.comboBox_SelectMode = new System.Windows.Forms.ComboBox();
             this.checkBox_CenterSnap = new System.Windows.Forms.CheckBox();
             this.button_OK = new System.Windows.Forms.Button();
+            this.label_PixelSnap = new System.Windows.Forms.Label();
+            this.numericUpDown_PixelSnap = new System.Windows.Forms.NumericUpDown();
             this.tabControl_Option.SuspendLayout();
             this.tabPage_SelectLayers.SuspendLayout();
             this.tabPage_Setting.SuspendLayout();
@@ -55,6 +59,7 @@
             this.groupBox_Pixel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxRadius)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_RadiusChangeLimit)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PixelSnap)).BeginInit();
             this.SuspendLayout();
             // 
             // checkedListBox_EditablePolyLines
@@ -93,7 +98,7 @@
             this.tabControl_Option.Location = new System.Drawing.Point(26, 12);
             this.tabControl_Option.Name = "tabControl_Option";
             this.tabControl_Option.SelectedIndex = 0;
-            this.tabControl_Option.Size = new System.Drawing.Size(242, 306);
+            this.tabControl_Option.Size = new System.Drawing.Size(242, 318);
             this.tabControl_Option.TabIndex = 4;
             // 
             // tabPage_SelectLayers
@@ -122,6 +127,10 @@
             // 
             // tabPage_Setting
             // 
+            this.tabPage_Setting.Controls.Add(this.numericUpDown_PixelSnap);
+            this.tabPage_Setting.Controls.Add(this.label_PixelSnap);
+            this.tabPage_Setting.Controls.Add(this.comboBox_KeySnapSwitch);
+            this.tabPage_Setting.Controls.Add(this.label_KeySnapSwitch);
             this.tabPage_Setting.Controls.Add(this.button_SettingDefault);
             this.tabPage_Setting.Controls.Add(this.button_Setting_Confirm);
             this.tabPage_Setting.Controls.Add(this.numericUpDown_MaxFeaturesSelect);
@@ -133,14 +142,31 @@
             this.tabPage_Setting.Location = new System.Drawing.Point(4, 22);
             this.tabPage_Setting.Name = "tabPage_Setting";
             this.tabPage_Setting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage_Setting.Size = new System.Drawing.Size(234, 280);
+            this.tabPage_Setting.Size = new System.Drawing.Size(234, 292);
             this.tabPage_Setting.TabIndex = 1;
             this.tabPage_Setting.Text = "Setting";
             this.tabPage_Setting.UseVisualStyleBackColor = true;
             // 
+            // comboBox_KeySnapSwitch
+            // 
+            this.comboBox_KeySnapSwitch.FormattingEnabled = true;
+            this.comboBox_KeySnapSwitch.Location = new System.Drawing.Point(119, 28);
+            this.comboBox_KeySnapSwitch.Name = "comboBox_KeySnapSwitch";
+            this.comboBox_KeySnapSwitch.Size = new System.Drawing.Size(93, 20);
+            this.comboBox_KeySnapSwitch.TabIndex = 8;
+            // 
+            // label_KeySnapSwitch
+            // 
+            this.label_KeySnapSwitch.AutoSize = true;
+            this.label_KeySnapSwitch.Location = new System.Drawing.Point(18, 32);
+            this.label_KeySnapSwitch.Name = "label_KeySnapSwitch";
+            this.label_KeySnapSwitch.Size = new System.Drawing.Size(83, 12);
+            this.label_KeySnapSwitch.TabIndex = 7;
+            this.label_KeySnapSwitch.Text = "KeySnapSwitch";
+            // 
             // button_SettingDefault
             // 
-            this.button_SettingDefault.Location = new System.Drawing.Point(15, 223);
+            this.button_SettingDefault.Location = new System.Drawing.Point(15, 249);
             this.button_SettingDefault.Name = "button_SettingDefault";
             this.button_SettingDefault.Size = new System.Drawing.Size(75, 28);
             this.button_SettingDefault.TabIndex = 6;
@@ -150,7 +176,7 @@
             // 
             // button_Setting_Confirm
             // 
-            this.button_Setting_Confirm.Location = new System.Drawing.Point(136, 223);
+            this.button_Setting_Confirm.Location = new System.Drawing.Point(136, 249);
             this.button_Setting_Confirm.Name = "button_Setting_Confirm";
             this.button_Setting_Confirm.Size = new System.Drawing.Size(69, 28);
             this.button_Setting_Confirm.TabIndex = 6;
@@ -160,7 +186,7 @@
             // 
             // numericUpDown_MaxFeaturesSelect
             // 
-            this.numericUpDown_MaxFeaturesSelect.Location = new System.Drawing.Point(146, 168);
+            this.numericUpDown_MaxFeaturesSelect.Location = new System.Drawing.Point(154, 222);
             this.numericUpDown_MaxFeaturesSelect.Minimum = new decimal(new int[] {
             1,
             0,
@@ -170,7 +196,7 @@
             this.numericUpDown_MaxFeaturesSelect.Size = new System.Drawing.Size(51, 21);
             this.numericUpDown_MaxFeaturesSelect.TabIndex = 5;
             this.numericUpDown_MaxFeaturesSelect.Value = new decimal(new int[] {
-            10,
+            20,
             0,
             0,
             0});
@@ -178,7 +204,7 @@
             // label_MaxFeaturesSelect
             // 
             this.label_MaxFeaturesSelect.AutoSize = true;
-            this.label_MaxFeaturesSelect.Location = new System.Drawing.Point(23, 170);
+            this.label_MaxFeaturesSelect.Location = new System.Drawing.Point(31, 224);
             this.label_MaxFeaturesSelect.Name = "label_MaxFeaturesSelect";
             this.label_MaxFeaturesSelect.Size = new System.Drawing.Size(107, 12);
             this.label_MaxFeaturesSelect.TabIndex = 4;
@@ -190,7 +216,7 @@
             this.groupBox_Pixel.Controls.Add(this.numericUpDown_RadiusChangeLimit);
             this.groupBox_Pixel.Controls.Add(this.label_MaxRadius);
             this.groupBox_Pixel.Controls.Add(this.label_RadiusChangeLimit);
-            this.groupBox_Pixel.Location = new System.Drawing.Point(12, 64);
+            this.groupBox_Pixel.Location = new System.Drawing.Point(20, 118);
             this.groupBox_Pixel.Name = "groupBox_Pixel";
             this.groupBox_Pixel.Size = new System.Drawing.Size(193, 91);
             this.groupBox_Pixel.TabIndex = 3;
@@ -199,14 +225,14 @@
             // 
             // numericUpDown_MaxRadius
             // 
-            this.numericUpDown_MaxRadius.Location = new System.Drawing.Point(134, 53);
+            this.numericUpDown_MaxRadius.Location = new System.Drawing.Point(134, 60);
             this.numericUpDown_MaxRadius.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.numericUpDown_MaxRadius.Minimum = new decimal(new int[] {
-            6,
+            100,
             0,
             0,
             0});
@@ -221,7 +247,12 @@
             // 
             // numericUpDown_RadiusChangeLimit
             // 
-            this.numericUpDown_RadiusChangeLimit.Location = new System.Drawing.Point(134, 25);
+            this.numericUpDown_RadiusChangeLimit.Location = new System.Drawing.Point(134, 26);
+            this.numericUpDown_RadiusChangeLimit.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             this.numericUpDown_RadiusChangeLimit.Minimum = new decimal(new int[] {
             1,
             0,
@@ -231,7 +262,7 @@
             this.numericUpDown_RadiusChangeLimit.Size = new System.Drawing.Size(55, 21);
             this.numericUpDown_RadiusChangeLimit.TabIndex = 2;
             this.numericUpDown_RadiusChangeLimit.Value = new decimal(new int[] {
-            3,
+            2,
             0,
             0,
             0});
@@ -239,7 +270,7 @@
             // label_MaxRadius
             // 
             this.label_MaxRadius.AutoSize = true;
-            this.label_MaxRadius.Location = new System.Drawing.Point(11, 53);
+            this.label_MaxRadius.Location = new System.Drawing.Point(11, 60);
             this.label_MaxRadius.Name = "label_MaxRadius";
             this.label_MaxRadius.Size = new System.Drawing.Size(59, 12);
             this.label_MaxRadius.TabIndex = 1;
@@ -248,7 +279,7 @@
             // label_RadiusChangeLimit
             // 
             this.label_RadiusChangeLimit.AutoSize = true;
-            this.label_RadiusChangeLimit.Location = new System.Drawing.Point(11, 27);
+            this.label_RadiusChangeLimit.Location = new System.Drawing.Point(11, 28);
             this.label_RadiusChangeLimit.Name = "label_RadiusChangeLimit";
             this.label_RadiusChangeLimit.Size = new System.Drawing.Size(107, 12);
             this.label_RadiusChangeLimit.TabIndex = 0;
@@ -257,7 +288,7 @@
             // label_SelectMode
             // 
             this.label_SelectMode.AutoSize = true;
-            this.label_SelectMode.Location = new System.Drawing.Point(7, 35);
+            this.label_SelectMode.Location = new System.Drawing.Point(15, 95);
             this.label_SelectMode.Name = "label_SelectMode";
             this.label_SelectMode.Size = new System.Drawing.Size(65, 12);
             this.label_SelectMode.TabIndex = 2;
@@ -266,7 +297,7 @@
             // comboBox_SelectMode
             // 
             this.comboBox_SelectMode.FormattingEnabled = true;
-            this.comboBox_SelectMode.Location = new System.Drawing.Point(85, 28);
+            this.comboBox_SelectMode.Location = new System.Drawing.Point(93, 88);
             this.comboBox_SelectMode.Name = "comboBox_SelectMode";
             this.comboBox_SelectMode.Size = new System.Drawing.Size(121, 20);
             this.comboBox_SelectMode.TabIndex = 1;
@@ -274,7 +305,7 @@
             // checkBox_CenterSnap
             // 
             this.checkBox_CenterSnap.AutoSize = true;
-            this.checkBox_CenterSnap.Location = new System.Drawing.Point(6, 6);
+            this.checkBox_CenterSnap.Location = new System.Drawing.Point(20, 6);
             this.checkBox_CenterSnap.Name = "checkBox_CenterSnap";
             this.checkBox_CenterSnap.Size = new System.Drawing.Size(84, 16);
             this.checkBox_CenterSnap.TabIndex = 0;
@@ -283,7 +314,7 @@
             // 
             // button_OK
             // 
-            this.button_OK.Location = new System.Drawing.Point(26, 328);
+            this.button_OK.Location = new System.Drawing.Point(26, 336);
             this.button_OK.Name = "button_OK";
             this.button_OK.Size = new System.Drawing.Size(75, 23);
             this.button_OK.TabIndex = 5;
@@ -291,16 +322,47 @@
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
             // 
-            // FormOptionVerticesToCenter
+            // label_PixelSnap
+            // 
+            this.label_PixelSnap.AutoSize = true;
+            this.label_PixelSnap.Location = new System.Drawing.Point(22, 59);
+            this.label_PixelSnap.Name = "label_PixelSnap";
+            this.label_PixelSnap.Size = new System.Drawing.Size(59, 12);
+            this.label_PixelSnap.TabIndex = 9;
+            this.label_PixelSnap.Text = "PixelSnap";
+            // 
+            // numericUpDown_PixelSnap
+            // 
+            this.numericUpDown_PixelSnap.Location = new System.Drawing.Point(119, 57);
+            this.numericUpDown_PixelSnap.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown_PixelSnap.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown_PixelSnap.Name = "numericUpDown_PixelSnap";
+            this.numericUpDown_PixelSnap.Size = new System.Drawing.Size(54, 21);
+            this.numericUpDown_PixelSnap.TabIndex = 10;
+            this.numericUpDown_PixelSnap.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // FormOption
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(306, 363);
+            this.ClientSize = new System.Drawing.Size(306, 372);
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.tabControl_Option);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "FormOptionVerticesToCenter";
+            this.Name = "FormOption";
             this.Text = "OptionVerticesToCenter";
             this.tabControl_Option.ResumeLayout(false);
             this.tabPage_SelectLayers.ResumeLayout(false);
@@ -311,6 +373,7 @@
             this.groupBox_Pixel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_MaxRadius)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_RadiusChangeLimit)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_PixelSnap)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -337,5 +400,9 @@
         private System.Windows.Forms.Button button_Setting_Confirm;
         private System.Windows.Forms.Button button_OK;
         private System.Windows.Forms.Button button_SettingDefault;
+        private System.Windows.Forms.Label label_KeySnapSwitch;
+        private System.Windows.Forms.ComboBox comboBox_KeySnapSwitch;
+        private System.Windows.Forms.NumericUpDown numericUpDown_PixelSnap;
+        private System.Windows.Forms.Label label_PixelSnap;
     }
 }
