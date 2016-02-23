@@ -168,12 +168,18 @@
     <EmbeddedResource Include="FormOption.resx">
       <DependentUpon>FormOption.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormOption.zh-Hans.resx">
+      <DependentUpon>FormOption.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\ButtonUndo.png" />
   </ItemGroup>
   <ItemGroup>
     <AddInContent Include="Images\ButtonRedo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AddInContent Include="Config.zh-CN.xml" />
   </ItemGroup>
   <PropertyGroup>
     <ZipFileExtension>esriAddIn</ZipFileExtension>

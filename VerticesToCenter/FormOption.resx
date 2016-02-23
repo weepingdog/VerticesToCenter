@@ -117,4 +117,631 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="&gt;&gt;tabPage_Setting.Name" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;groupBox_Pixel.Name" xml:space="preserve">
+    <value>groupBox_Pixel</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="tabPage_SelectLayers.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="&gt;&gt;button_SelectNone.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;comboBox_KeySnapSwitch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkBox_CenterSnap.Name" xml:space="preserve">
+    <value>checkBox_CenterSnap</value>
+  </data>
+  <data name="button_SettingDefault.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="groupBox_Pixel.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 151</value>
+  </data>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="label_RadiusChangeLimit.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label_SelectMode.ZOrder" xml:space="preserve">
+    <value>6</value>
+  </data>
+  <data name="label_RadiusChangeLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 12</value>
+  </data>
+  <data name="button_SelectLayers_Confirm.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;button_SelectNone.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_SelectAll.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;tabPage_Setting.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;button_SelectNone.Name" xml:space="preserve">
+    <value>button_SelectNone</value>
+  </data>
+  <data name="&gt;&gt;button_Setting_Confirm.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="&gt;&gt;button_SelectLayers_Confirm.Name" xml:space="preserve">
+    <value>button_SelectLayers_Confirm</value>
+  </data>
+  <data name="&gt;&gt;comboBox_KeySnapSwitch.Name" xml:space="preserve">
+    <value>comboBox_KeySnapSwitch</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxFeaturesSelect.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;groupBox_SnapOption.Name" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="comboBox_KeySnapSwitch.TabIndex" type="System.Int32, mscorlib">
+    <value>8</value>
+  </data>
+  <data name="groupBox_SnapOption.Location" type="System.Drawing.Point, System.Drawing">
+    <value>19, 3</value>
+  </data>
+  <data name="comboBox_KeySnapSwitch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>93, 20</value>
+  </data>
+  <data name="tabPage_SelectLayers.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 334</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox_EditablePolyLines.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;groupBox_SnapOption.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;button_OK.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBox_KeySnapSwitch.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="button_OK.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="button_OK.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="&gt;&gt;tabPage_Setting.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_RadiusChangeLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 28</value>
+  </data>
+  <data name="checkBox_CenterSnap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 20</value>
+  </data>
+  <data name="$this.Text" xml:space="preserve">
+    <value>OptionVerticesToCenter</value>
+  </data>
+  <data name="comboBox_KeySnapSwitch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 39</value>
+  </data>
+  <data name="numericUpDown_RadiusChangeLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="numericUpDown_MaxRadius.Size" type="System.Drawing.Size, System.Drawing">
+    <value>53, 21</value>
+  </data>
+  <data name="label_PixelSnap.Text" xml:space="preserve">
+    <value>PixelSnap</value>
+  </data>
+  <data name="checkBox_CenterSnap.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;button_Setting_Confirm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxRadius.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="checkBox_CenterSnap.Text" xml:space="preserve">
+    <value>CenterSnap</value>
+  </data>
+  <data name="button_SelectAll.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 256</value>
+  </data>
+  <data name="tabPage_Setting.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 22</value>
+  </data>
+  <data name="label_MaxFeaturesSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="&gt;&gt;tabPage_SelectLayers.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabPage, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;groupBox_Pixel.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;label_MaxRadius.Parent" xml:space="preserve">
+    <value>groupBox_Pixel</value>
+  </data>
+  <data name="numericUpDown_MaxRadius.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label_RadiusChangeLimit.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;comboBox_SelectMode.Name" xml:space="preserve">
+    <value>comboBox_SelectMode</value>
+  </data>
+  <data name="&gt;&gt;tabPage_SelectLayers.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;button_OK.Name" xml:space="preserve">
+    <value>button_OK</value>
+  </data>
+  <data name="&gt;&gt;label_KeySnapSwitch.ZOrder" xml:space="preserve">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;button_SelectAll.Parent" xml:space="preserve">
+    <value>tabPage_SelectLayers</value>
+  </data>
+  <data name="groupBox_Pixel.Text" xml:space="preserve">
+    <value>PixelOption</value>
+  </data>
+  <data name="button_SelectAll.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="button_SelectAll.Text" xml:space="preserve">
+    <value>SelectAll</value>
+  </data>
+  <data name="button_SelectLayers_Confirm.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="&gt;&gt;label_KeySnapSwitch.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;label_RadiusChangeLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox_SnapOption.Text" xml:space="preserve">
+    <value>SnapOption</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_PixelSnap.Name" xml:space="preserve">
+    <value>numericUpDown_PixelSnap</value>
+  </data>
+  <data name="&gt;&gt;label_KeySnapSwitch.Name" xml:space="preserve">
+    <value>label_KeySnapSwitch</value>
+  </data>
+  <data name="&gt;&gt;groupBox_SnapOption.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;button_SettingDefault.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;label_SelectMode.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxFeaturesSelect.Name" xml:space="preserve">
+    <value>numericUpDown_MaxFeaturesSelect</value>
+  </data>
+  <data name="comboBox_SelectMode.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="button_SelectNone.Text" xml:space="preserve">
+    <value>SelectNone</value>
+  </data>
+  <data name="&gt;&gt;button_SettingDefault.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="label_SelectMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 123</value>
+  </data>
+  <data name="&gt;&gt;tabPage_SelectLayers.Parent" xml:space="preserve">
+    <value>tabControl_Option</value>
+  </data>
+  <data name="button_Setting_Confirm.Text" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxFeaturesSelect.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;label_KeySnapSwitch.Parent" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="button_OK.Location" type="System.Drawing.Point, System.Drawing">
+    <value>104, 388</value>
+  </data>
+  <data name="button_SelectLayers_Confirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 293</value>
+  </data>
+  <data name="&gt;&gt;button_Setting_Confirm.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;label_MaxFeaturesSelect.Name" xml:space="preserve">
+    <value>label_MaxFeaturesSelect</value>
+  </data>
+  <data name="&gt;&gt;$this.Name" xml:space="preserve">
+    <value>FormOption</value>
+  </data>
+  <data name="&gt;&gt;button_SettingDefault.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="checkedListBox_EditablePolyLines.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="button_Setting_Confirm.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="checkBox_CenterSnap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_KeySnapSwitch.TabIndex" type="System.Int32, mscorlib">
+    <value>7</value>
+  </data>
+  <data name="label_PixelSnap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 77</value>
+  </data>
+  <data name="&gt;&gt;label_PixelSnap.Name" xml:space="preserve">
+    <value>label_PixelSnap</value>
+  </data>
+  <data name="&gt;&gt;checkBox_CenterSnap.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="button_Setting_Confirm.Location" type="System.Drawing.Point, System.Drawing">
+    <value>140, 289</value>
+  </data>
+  <data name="groupBox_Pixel.Size" type="System.Drawing.Size, System.Drawing">
+    <value>203, 91</value>
+  </data>
+  <data name="label_KeySnapSwitch.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label_SelectMode.Name" xml:space="preserve">
+    <value>label_SelectMode</value>
+  </data>
+  <data name="&gt;&gt;tabPage_Setting.Parent" xml:space="preserve">
+    <value>tabControl_Option</value>
+  </data>
+  <data name="&gt;&gt;label_PixelSnap.Parent" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="label_RadiusChangeLimit.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="numericUpDown_PixelSnap.Location" type="System.Drawing.Point, System.Drawing">
+    <value>106, 75</value>
+  </data>
+  <data name="&gt;&gt;groupBox_Pixel.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox_SnapOption.Size" type="System.Drawing.Size, System.Drawing">
+    <value>201, 108</value>
+  </data>
+  <data name="&gt;&gt;comboBox_SelectMode.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;button_Setting_Confirm.Name" xml:space="preserve">
+    <value>button_Setting_Confirm</value>
+  </data>
+  <data name="&gt;&gt;button_OK.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_RadiusChangeLimit.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxRadius.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;button_SelectLayers_Confirm.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comboBox_SelectMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox_EditablePolyLines.Parent" xml:space="preserve">
+    <value>tabPage_SelectLayers</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxFeaturesSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_PixelSnap.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="tabPage_SelectLayers.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="&gt;&gt;tabControl_Option.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TabControl, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="button_SelectLayers_Confirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox_EditablePolyLines.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckedListBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="button_OK.Text" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_RadiusChangeLimit.Parent" xml:space="preserve">
+    <value>groupBox_Pixel</value>
+  </data>
+  <data name="&gt;&gt;label_MaxFeaturesSelect.ZOrder" xml:space="preserve">
+    <value>4</value>
+  </data>
+  <data name="tabControl_Option.Size" type="System.Drawing.Size, System.Drawing">
+    <value>251, 360</value>
+  </data>
+  <data name="&gt;&gt;tabControl_Option.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="tabPage_Setting.Size" type="System.Drawing.Size, System.Drawing">
+    <value>243, 334</value>
+  </data>
+  <data name="comboBox_SelectMode.Location" type="System.Drawing.Point, System.Drawing">
+    <value>99, 120</value>
+  </data>
+  <data name="button_SelectNone.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 256</value>
+  </data>
+  <data name="&gt;&gt;label_MaxFeaturesSelect.Parent" xml:space="preserve">
+    <value>tabPage_Setting</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_PixelSnap.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;button_OK.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="tabControl_Option.Location" type="System.Drawing.Point, System.Drawing">
+    <value>26, 12</value>
+  </data>
+  <data name="&gt;&gt;label_PixelSnap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_MaxRadius.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 12</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxRadius.Parent" xml:space="preserve">
+    <value>groupBox_Pixel</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_PixelSnap.Parent" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="&gt;&gt;button_SelectLayers_Confirm.Parent" xml:space="preserve">
+    <value>tabPage_SelectLayers</value>
+  </data>
+  <data name="&gt;&gt;checkedListBox_EditablePolyLines.Name" xml:space="preserve">
+    <value>checkedListBox_EditablePolyLines</value>
+  </data>
+  <data name="tabPage_SelectLayers.TabIndex" type="System.Int32, mscorlib">
+    <value>0</value>
+  </data>
+  <data name="tabPage_Setting.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;label_RadiusChangeLimit.Parent" xml:space="preserve">
+    <value>groupBox_Pixel</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_RadiusChangeLimit.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_SelectMode.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_KeySnapSwitch.Text" xml:space="preserve">
+    <value>KeySnapSwitch</value>
+  </data>
+  <data name="&gt;&gt;$this.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_SelectMode.Text" xml:space="preserve">
+    <value>SelectMode</value>
+  </data>
+  <data name="groupBox_Pixel.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;button_SelectLayers_Confirm.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="numericUpDown_MaxRadius.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 60</value>
+  </data>
+  <data name="numericUpDown_PixelSnap.TabIndex" type="System.Int32, mscorlib">
+    <value>10</value>
+  </data>
+  <data name="&gt;&gt;label_PixelSnap.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="tabPage_Setting.Text" xml:space="preserve">
+    <value>Setting</value>
+  </data>
+  <data name="checkedListBox_EditablePolyLines.Size" type="System.Drawing.Size, System.Drawing">
+    <value>200, 244</value>
+  </data>
+  <data name="numericUpDown_RadiusChangeLimit.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="label_SelectMode.TabIndex" type="System.Int32, mscorlib">
+    <value>2</value>
+  </data>
+  <data name="numericUpDown_MaxFeaturesSelect.TabIndex" type="System.Int32, mscorlib">
+    <value>5</value>
+  </data>
+  <data name="&gt;&gt;button_SelectAll.Name" xml:space="preserve">
+    <value>button_SelectAll</value>
+  </data>
+  <data name="label_KeySnapSwitch.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 42</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 12</value>
+  </data>
+  <data name="comboBox_SelectMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>121, 20</value>
+  </data>
+  <data name="label_SelectMode.Size" type="System.Drawing.Size, System.Drawing">
+    <value>65, 12</value>
+  </data>
+  <data name="label_PixelSnap.TabIndex" type="System.Int32, mscorlib">
+    <value>9</value>
+  </data>
+  <data name="numericUpDown_RadiusChangeLimit.Location" type="System.Drawing.Point, System.Drawing">
+    <value>134, 26</value>
+  </data>
+  <data name="label_PixelSnap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>59, 12</value>
+  </data>
+  <data name="&gt;&gt;comboBox_SelectMode.ZOrder" xml:space="preserve">
+    <value>7</value>
+  </data>
+  <data name="label_RadiusChangeLimit.Text" xml:space="preserve">
+    <value>RadiusChangeLimit</value>
+  </data>
+  <data name="&gt;&gt;groupBox_SnapOption.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="tabControl_Option.TabIndex" type="System.Int32, mscorlib">
+    <value>4</value>
+  </data>
+  <data name="label_MaxFeaturesSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>107, 12</value>
+  </data>
+  <data name="&gt;&gt;button_SelectNone.Parent" xml:space="preserve">
+    <value>tabPage_SelectLayers</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_MaxRadius.Name" xml:space="preserve">
+    <value>numericUpDown_MaxRadius</value>
+  </data>
+  <data name="numericUpDown_MaxFeaturesSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>151, 250</value>
+  </data>
+  <data name="checkedListBox_EditablePolyLines.Location" type="System.Drawing.Point, System.Drawing">
+    <value>18, 6</value>
+  </data>
+  <data name="&gt;&gt;label_MaxFeaturesSelect.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="label_MaxFeaturesSelect.Text" xml:space="preserve">
+    <value>MaxFeaturesSelect</value>
+  </data>
+  <data name="&gt;&gt;button_SettingDefault.Name" xml:space="preserve">
+    <value>button_SettingDefault</value>
+  </data>
+  <data name="numericUpDown_MaxFeaturesSelect.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 21</value>
+  </data>
+  <data name="button_SettingDefault.Text" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>313, 430</value>
+  </data>
+  <data name="numericUpDown_PixelSnap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>54, 21</value>
+  </data>
+  <data name="label_MaxRadius.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="label_MaxRadius.Location" type="System.Drawing.Point, System.Drawing">
+    <value>11, 60</value>
+  </data>
+  <data name="&gt;&gt;tabPage_SelectLayers.Name" xml:space="preserve">
+    <value>tabPage_SelectLayers</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_RadiusChangeLimit.Name" xml:space="preserve">
+    <value>numericUpDown_RadiusChangeLimit</value>
+  </data>
+  <data name="button_SettingDefault.TabIndex" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <data name="button_SelectNone.TabIndex" type="System.Int32, mscorlib">
+    <value>3</value>
+  </data>
+  <data name="&gt;&gt;label_SelectMode.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabPage_SelectLayers.Text" xml:space="preserve">
+    <value>SelectLayers</value>
+  </data>
+  <data name="label_MaxRadius.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="&gt;&gt;label_RadiusChangeLimit.Name" xml:space="preserve">
+    <value>label_RadiusChangeLimit</value>
+  </data>
+  <data name="&gt;&gt;label_MaxRadius.Name" xml:space="preserve">
+    <value>label_MaxRadius</value>
+  </data>
+  <data name="&gt;&gt;checkBox_CenterSnap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.CheckBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="button_SelectNone.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="&gt;&gt;tabControl_Option.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="label_KeySnapSwitch.Size" type="System.Drawing.Size, System.Drawing">
+    <value>83, 12</value>
+  </data>
+  <data name="&gt;&gt;label_MaxRadius.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Label, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="button_SelectAll.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="&gt;&gt;numericUpDown_PixelSnap.Type" xml:space="preserve">
+    <value>System.Windows.Forms.NumericUpDown, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="groupBox_SnapOption.TabIndex" type="System.Int32, mscorlib">
+    <value>11</value>
+  </data>
+  <data name="&gt;&gt;label_MaxRadius.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="button_SettingDefault.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 289</value>
+  </data>
+  <data name="button_Setting_Confirm.Size" type="System.Drawing.Size, System.Drawing">
+    <value>75, 30</value>
+  </data>
+  <data name="label_MaxRadius.Text" xml:space="preserve">
+    <value>MaxRadius</value>
+  </data>
+  <data name="&gt;&gt;tabControl_Option.Name" xml:space="preserve">
+    <value>tabControl_Option</value>
+  </data>
+  <data name="checkBox_CenterSnap.Size" type="System.Drawing.Size, System.Drawing">
+    <value>84, 16</value>
+  </data>
+  <data name="&gt;&gt;comboBox_KeySnapSwitch.Parent" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="&gt;&gt;button_SelectAll.Type" xml:space="preserve">
+    <value>System.Windows.Forms.Button, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="tabPage_Setting.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>3, 3, 3, 3</value>
+  </data>
+  <data name="label_MaxFeaturesSelect.AutoSize" type="System.Boolean, mscorlib">
+    <value>True</value>
+  </data>
+  <data name="label_MaxFeaturesSelect.Location" type="System.Drawing.Point, System.Drawing">
+    <value>17, 250</value>
+  </data>
+  <data name="&gt;&gt;checkBox_CenterSnap.Parent" xml:space="preserve">
+    <value>groupBox_SnapOption</value>
+  </data>
+  <data name="&gt;&gt;groupBox_Pixel.ZOrder" xml:space="preserve">
+    <value>5</value>
+  </data>
+  <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="$this.Language" type="System.Globalization.CultureInfo, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>zh-Hans</value>
+  </metadata>
 </root>

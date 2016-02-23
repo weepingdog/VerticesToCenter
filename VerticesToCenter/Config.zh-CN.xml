@@ -14,21 +14,21 @@ VerticesToCenter</Description>
   <AddIn language="CLR4.0" library="VerticesToCenter.dll" namespace="VerticesToCenter">
     <ArcMap>
       <Commands>
-        <Button id="SMGI_VerticesToCenter_ButtonOption" class="ButtonOption" message="Open the OptionFrom to make Settings." caption="Option VerticesToCenter" tip="Option.&#xD;&#xA;VerticesToCenter" category="Add-In Controls" image="Images\ButtonOption.png" onDemand="false">
+        <Button id="SMGI_VerticesToCenter_ButtonOption" class="ButtonOption" message="打开选项对话框." caption="选项" tip="节点到圆心选项" category="节点到圆心" image="Images\ButtonOption.png" onDemand="false">
           <Help heading="OptionVerticesToCenter">ButtonOption</Help>
         </Button>
-        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="Set specified vertexes of features selected  by a circle which in range of the circle to the center." caption="Tool VerticesToCenter" tip="Tool.&#xD;&#xA;VerticesToCenter" category="Add-In Controls" image="Images\Tool.png" onDemand="false">
+        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="按圆选择要素，将所选要素符合条件节点移动到圆心." caption="节点到圆心" tip="节点到圆心" category="节点到圆心" image="Images\Tool.png" onDemand="false">
           <Help heading="ToolVerticesToCenter">Tool</Help>
         </Tool>
-        <Button id="SMGI_VerticesToCenter_ButtonUndo" class="ButtonUndo" message="Undo vertexes editting operations." caption="Undo VerticesToCenter" tip="Undo." category="Add-In Controls" image="Images\ButtonUndo.png" onDemand="false">
+        <Button id="SMGI_VerticesToCenter_ButtonUndo" class="撤销" message="撤销节点编辑操作(一次多个点)." caption="撤销" tip="撤销" category="节点到圆心" image="Images\ButtonUndo.png" onDemand="false">
           <Help heading="UndoVerticesToCenter">ButtonUndo</Help>
         </Button>
-        <Button id="SMGI_VerticesToCenter_ButtonRedo" class="ButtonRedo" message="Redo vertexes editting operations." caption="Redo VerticesToCenter" tip="Redo." category="Add-In Controls" image="Images\ButtonRedo.png" onDemand="false">
+        <Button id="SMGI_VerticesToCenter_ButtonRedo" class="重做" message="重做节点编辑操作(一次多个点)." caption="重做" tip="重做" category="节点到圆心" image="Images\ButtonRedo.png" onDemand="false">
           <Help heading="RedoVerticesToCenter">ButtonRedo</Help>
         </Button>
       </Commands>
       <Toolbars>
-        <Toolbar id="SMGI_VerticesToCenter_VerticesToCenter" caption="VerticesToCenter" showInitially="true">
+        <Toolbar id="SMGI_VerticesToCenter_VerticesToCenter" caption="节点到圆心" showInitially="true">
           <Items>
             <Item refID="SMGI_VerticesToCenter_ButtonOption" />
             <Item refID="SMGI_VerticesToCenter_Tool" separator="true" />
