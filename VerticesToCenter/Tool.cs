@@ -19,6 +19,8 @@ namespace VerticesToCenter
         private IPoint m_PointCentre;
         private IPoint m_PointMouseMoveTo;
 
+        private IPoint m_PointLastSnapWhenMove = null;
+
         private bool m_IsSnapKeyDown=false;
         
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
@@ -40,7 +42,7 @@ namespace VerticesToCenter
 
         protected override void OnActivate()
         {
-            this.Cursor = System.Windows.Forms.Cursors.Cross;
+            this.Cursor = System.Windows.Forms.Cursors.UpArrow;
         }
 
         protected override bool OnDeactivate()
@@ -65,12 +67,18 @@ namespace VerticesToCenter
 
             if (GlobeStatus.Setting.CenterSnap && m_IsSnapKeyDown)//若开启了圆心捕捉，且按下了(自定义)捕捉开关键
             {
-                double radiusSnap = 2 * GlobeStatus.Setting.PixelRadiusChangeLimit * GlobeStatus.MapUnit;
-                IPoint pointSnap = PointSnapWhenMouseDown(GlobeStatus.ActiveView, esriGeometryHitPartType.esriGeometryPartVertex, PointMouseDown, GlobeStatus.Setting.PixelRadiusChangeLimit);
+                double radiusSnap = GlobeStatus.Setting.PixelSnap * GlobeStatus.MapUnit;
+                IPoint pointSnap = PointSnapWhenMouseDown(GlobeStatus.ActiveView, esriGeometryHitPartType.esriGeometryPartVertex, PointMouseDown, radiusSnap);
                 if (pointSnap != null)
+                {
                     m_PointCentre = pointSnap;
+                    FunctionCommon.DrawPointMarker(GlobeStatus.Map, pointSnap);
+                }
                 else
+                {
                     m_PointCentre = PointMouseDown;
+                    FunctionCommon.RemovePointMarker(GlobeStatus.Map);
+                }
             }
             else
             {
@@ -83,6 +91,7 @@ namespace VerticesToCenter
             FeatureSelectWhenMouseDown(m_PointCentre);
 
             m_isMouseDown = true;
+            m_PointLastSnapWhenMove = null;
         }
         private void CircleFeedBackWhenMouseDown(IPoint pointCentre)
         {
@@ -110,13 +119,26 @@ namespace VerticesToCenter
             {
                 if (GlobeStatus.Setting.CenterSnap && m_IsSnapKeyDown)
                 {
-                    double radiusSnap = 2 * GlobeStatus.Setting.PixelRadiusChangeLimit * GlobeStatus.MapUnit;
+                    double radiusSnap = GlobeStatus.Setting.PixelSnap * GlobeStatus.MapUnit;
                     IPoint pointSnap = PointSnapWhenMouseMove(GlobeStatus.ActiveView, esriGeometryHitPartType.esriGeometryPartVertex, m_PointMouseMoveTo, 5);
 
                     if (pointSnap != null)
                     {
-                        //画一个捕捉点
-                        //如果不使用AxMapControl
+                        double distance;
+                        if (m_PointLastSnapWhenMove != null)
+                        {
+                            distance = FunctionCommon.GetDistance2P(m_PointLastSnapWhenMove, pointSnap);
+                            if (distance > GlobeStatus.MapUnit * 0.5)
+                            {
+                                //画一个捕捉点
+                                FunctionCommon.DrawPointMarker(GlobeStatus.Map, pointSnap);
+                                m_PointLastSnapWhenMove = pointSnap;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        FunctionCommon.RemovePointMarker(GlobeStatus.Map);
                     }
                 }
                 return; 
@@ -176,6 +198,8 @@ namespace VerticesToCenter
         {
             //鼠标不再按下
             m_isMouseDown = false;
+            m_PointLastSnapWhenMove = null;
+            FunctionCommon.RemovePointMarker(GlobeStatus.Map);
 
             //鼠标放开时的点
             //IPoint PointMouseUp = GlobeStatus.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(arg.X, arg.Y);
@@ -230,15 +254,21 @@ namespace VerticesToCenter
             GlobeStatus.WorkspaceEdit.StartEditOperation();
             while (pFeature != null)
             {
-                string FeatureLayerName = FunctionCommon.GetLayerNameFromFeature(pFeature);
-                if (!(GlobeStatus.CheckedPolyLines.Contains(FeatureLayerName)))
+                if (pFeature.Shape.GeometryType != esriGeometryType.esriGeometryPolyline)
+                {
+                    pFeature = pRnumFeature.Next();
                     continue;
+                }
+                string FeatureLayerName = FunctionCommon.GetLayerNameFromFeature(pFeature);
+                
+                
+                if (!(GlobeStatus.CheckedPolyLines.Contains(FeatureLayerName)))
+                {
+                    pFeature = pRnumFeature.Next();
+                    continue;
+                }
 
-                //bool Changed = FeatureToCentre(pFeature.Shape, m_PointCentre, currentRadius, EnumPointEditModeVerticesToCenter.mostNearOne);
-                //if (Changed)
-                //    pFeature.Store();
                 Tuple<int, int> PointIDPair = FunctionCommon.GetPointIDPairFromFeature(pFeature, pointCenter, currentRadius, selectMode);
-
                 IPointCollection pPointCollection = pFeature.Shape as IPointCollection;    //图形几何点集
                 if (PointIDPair.Item1 ==0 || PointIDPair.Item2 > 0)
                 {
@@ -249,6 +279,7 @@ namespace VerticesToCenter
                     pFeature.Shape = (IGeometry)pPointCollection;
                     pFeature.Store();                    
                 }
+
                 pFeature = pRnumFeature.Next();
             }
             GlobeStatus.WorkspaceEdit.StopEditOperation();
@@ -271,15 +302,21 @@ namespace VerticesToCenter
         {
             Keys currendKeyDown = arg.KeyCode;
             if (currendKeyDown == GlobeStatus.Setting.KeySnapSwitch)
+            {
                 m_IsSnapKeyDown = true;
-            
+                this.Cursor = System.Windows.Forms.Cursors.Cross;
+            }            
         }
 
         protected override void OnKeyUp(ESRI.ArcGIS.Desktop.AddIns.Tool.KeyEventArgs arg)
         {
             Keys currendKeyUp = arg.KeyCode;
             if (currendKeyUp == GlobeStatus.Setting.KeySnapSwitch)
+            {
                 m_IsSnapKeyDown = false;
+                FunctionCommon.RemovePointMarker(GlobeStatus.Map);
+                this.Cursor = System.Windows.Forms.Cursors.UpArrow;
+            }
         }
     }
 }

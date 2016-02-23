@@ -294,7 +294,7 @@ namespace VerticesToCenter
                 if (featLayer != null && featLayer.Visible == true &&
                     (featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPolyline ||
                     featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPolygon ||
-                    featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPoint))
+                    featLayer.FeatureClass.ShapeType == esriGeometryType.esriGeometryPoint))                
                 {
                     featureCache.AddFeatures(featLayer.FeatureClass, null);
                     for (int j = 0; j < featureCache.Count; j++)
@@ -374,6 +374,36 @@ namespace VerticesToCenter
                 default:
                     return Keys.ControlKey;
             }
+        }
+
+        public static IElement DrawPointMarker(IMap map, IPoint point)
+        {
+            IMarkerElement markerElement = new MarkerElementClass();
+            ISimpleMarkerSymbol simpleMarkerSymbol = new SimpleMarkerSymbolClass();
+            IRgbColor color = new RgbColorClass();
+            color.Red = 200;
+            color.Green = 100;
+            color.Blue = 100;
+            simpleMarkerSymbol.Color = color as IColor;
+            simpleMarkerSymbol.Style = esriSimpleMarkerStyle.esriSMSSquare;            
+            markerElement.Symbol = simpleMarkerSymbol;
+
+            IElement element = markerElement as IElement;
+            element.Geometry = point;
+
+            IGraphicsContainer graphicsContainer = map as IGraphicsContainer;
+            graphicsContainer.AddElement(element, 0);
+            IActiveView activeView = map as IActiveView;
+            activeView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+            return element;
+        }
+
+        public static void RemovePointMarker(IMap map)
+        { 
+            IGraphicsContainer graphicsContainer = map as IGraphicsContainer;
+            graphicsContainer.DeleteAllElements();
+            IActiveView activeView = map as IActiveView;
+            activeView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);        
         }
     }
     public enum EnumSelectMode

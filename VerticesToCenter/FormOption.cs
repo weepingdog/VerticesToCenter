@@ -35,13 +35,13 @@ namespace VerticesToCenter
 
         private void SettingTapControlWhenFormStart()
         {
-            checkBox_CenterSnap.Checked = DefaultToolSetting.CenterSnap;
-            comboBox_KeySnapSwitch.SelectedIndex = FunctionCommon.GetIndexFromSnapKeyDown(DefaultToolSetting.KeySnapSwitch);
-            numericUpDown_PixelSnap.Value = DefaultToolSetting.PixelSnap;
-            comboBox_SelectMode.SelectedIndex = (int)(DefaultToolSetting.SelectMode);
-            numericUpDown_RadiusChangeLimit.Value = DefaultToolSetting.PixelRadiusChangeLimit;
-            numericUpDown_MaxRadius.Value = DefaultToolSetting.PixelMaxRadius;
-            numericUpDown_MaxFeaturesSelect.Value = DefaultToolSetting.MaxFeaturesSelect;  
+            checkBox_CenterSnap.Checked = GlobeStatus.Setting.CenterSnap;
+            comboBox_KeySnapSwitch.SelectedIndex = FunctionCommon.GetIndexFromSnapKeyDown(GlobeStatus.Setting.KeySnapSwitch);
+            numericUpDown_PixelSnap.Value = GlobeStatus.Setting.PixelSnap;
+            comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.Setting.SelectMode);
+            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.Setting.PixelRadiusChangeLimit;
+            numericUpDown_MaxRadius.Value = GlobeStatus.Setting.PixelMaxRadius;
+            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.Setting.MaxFeaturesSelect;  
         }
 
         private void UpdateComboBoxSnapKey()

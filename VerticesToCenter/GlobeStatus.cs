@@ -29,17 +29,11 @@ namespace VerticesToCenter
         }
         public static IMap Map
         {
-            get 
-            {
-                return MxDocument.FocusMap;
-            }
+            get { return MxDocument.FocusMap; }
         }
         public static IActiveView ActiveView
         {
-            get
-            {
-                return Map as IActiveView;
-            }
+            get { return Map as IActiveView; }
         }
         public static IEditor Editor
         {
@@ -50,6 +44,10 @@ namespace VerticesToCenter
                 IEditor editor = ArcMap.Application.FindExtensionByCLSID(editorUID) as IEditor;
                 return editor;
             }
+        }
+        public static IGraphicsContainer GraphicsContainer
+        {
+            get { return Map as IGraphicsContainer; }
         }
 
         //private static AxMapControl m_axMapControl;
