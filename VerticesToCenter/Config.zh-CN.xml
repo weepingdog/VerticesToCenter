@@ -20,10 +20,10 @@ VerticesToCenter</Description>
         <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="按圆选择要素，将所选要素符合条件节点移动到圆心." caption="节点到圆心" tip="节点到圆心" category="节点到圆心" image="Images\Tool.png" onDemand="false">
           <Help heading="ToolVerticesToCenter">Tool</Help>
         </Tool>
-        <Button id="SMGI_VerticesToCenter_ButtonUndo" class="撤销" message="撤销节点编辑操作(一次多个点)." caption="撤销" tip="撤销" category="节点到圆心" image="Images\ButtonUndo.png" onDemand="false">
+        <Button id="SMGI_VerticesToCenter_ButtonUndo" class="ButtonUndo" message="撤销节点编辑操作(一次多个点)." caption="撤销" tip="撤销" category="节点到圆心" image="Images\ButtonUndo.png" onDemand="false">
           <Help heading="UndoVerticesToCenter">ButtonUndo</Help>
         </Button>
-        <Button id="SMGI_VerticesToCenter_ButtonRedo" class="重做" message="重做节点编辑操作(一次多个点)." caption="重做" tip="重做" category="节点到圆心" image="Images\ButtonRedo.png" onDemand="false">
+        <Button id="SMGI_VerticesToCenter_ButtonRedo" class="ButtonRedo" message="重做节点编辑操作(一次多个点)." caption="重做" tip="重做" category="节点到圆心" image="Images\ButtonRedo.png" onDemand="false">
           <Help heading="RedoVerticesToCenter">ButtonRedo</Help>
         </Button>
       </Commands>
