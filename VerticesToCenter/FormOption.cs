@@ -15,6 +15,7 @@ namespace VerticesToCenter
         public FormOption()
         {
             InitializeComponent();
+            UpdateComboBoxSnapKey();
             UpdateComboBoxSelectMode();
             SelectLayersTapControlWhenFormStart();
             SettingTapControlWhenFormStart();
@@ -34,11 +35,24 @@ namespace VerticesToCenter
 
         private void SettingTapControlWhenFormStart()
         {
-            checkBox_CenterSnap.Checked = GlobeStatus.Setting.CenterSnap;
-            comboBox_SelectMode.SelectedIndex = (int)(GlobeStatus.Setting.SelectMode);
-            numericUpDown_RadiusChangeLimit.Value = GlobeStatus.Setting.PixelRadiusChangeLimit;
-            numericUpDown_MaxRadius.Value = GlobeStatus.Setting.PixelMaxRadius;
-            numericUpDown_MaxFeaturesSelect.Value = GlobeStatus.Setting.MaxFeaturesSelect;  
+            checkBox_CenterSnap.Checked = DefaultToolSetting.CenterSnap;
+            comboBox_KeySnapSwitch.SelectedIndex = FunctionCommon.GetIndexFromSnapKeyDown(DefaultToolSetting.KeySnapSwitch);
+            numericUpDown_PixelSnap.Value = DefaultToolSetting.PixelSnap;
+            comboBox_SelectMode.SelectedIndex = (int)(DefaultToolSetting.SelectMode);
+            numericUpDown_RadiusChangeLimit.Value = DefaultToolSetting.PixelRadiusChangeLimit;
+            numericUpDown_MaxRadius.Value = DefaultToolSetting.PixelMaxRadius;
+            numericUpDown_MaxFeaturesSelect.Value = DefaultToolSetting.MaxFeaturesSelect;  
+        }
+
+        private void UpdateComboBoxSnapKey()
+        {
+            comboBox_KeySnapSwitch.Items.Clear();
+            comboBox_KeySnapSwitch.Items.Add(Keys.ControlKey);
+            comboBox_KeySnapSwitch.Items.Add(Keys.LControlKey);
+            comboBox_KeySnapSwitch.Items.Add(Keys.RControlKey);
+            comboBox_KeySnapSwitch.Items.Add(Keys.ShiftKey);
+            comboBox_KeySnapSwitch.Items.Add(Keys.LShiftKey);
+            comboBox_KeySnapSwitch.Items.Add(Keys.RShiftKey);            
         }
 
         private void UpdateComboBoxSelectMode()
@@ -99,20 +113,25 @@ namespace VerticesToCenter
 
         private void SettingTabControlWhenConfirm()
         {
-            GlobeStatus.Setting.UpdateCenterSnap(checkBox_CenterSnap.Checked);
-            GlobeStatus.Setting.UpdateSelectMode((EnumSelectMode)comboBox_SelectMode.SelectedIndex);
-            GlobeStatus.Setting.UpdatePixelRadiusChangeLimit((int)numericUpDown_RadiusChangeLimit.Value);
-            GlobeStatus.Setting.UpdatePixelMaxRadius((int)numericUpDown_MaxRadius.Value);
-            GlobeStatus.Setting.UpdateMaxFeaturesSelect((int)numericUpDown_MaxFeaturesSelect.Value);
+            GlobeStatus.Setting.CenterSnap = checkBox_CenterSnap.Checked;
+            GlobeStatus.Setting.KeySnapSwitch = FunctionCommon.GetSnapKeyDownFromIndex(comboBox_KeySnapSwitch.SelectedIndex);
+            GlobeStatus.Setting.PixelSnap = (int)numericUpDown_PixelSnap.Value;
+            GlobeStatus.Setting.SelectMode = (EnumSelectMode)comboBox_SelectMode.SelectedIndex;
+            GlobeStatus.Setting.PixelRadiusChangeLimit = (int)numericUpDown_RadiusChangeLimit.Value;
+            GlobeStatus.Setting.PixelMaxRadius = (int)numericUpDown_MaxRadius.Value;
+            GlobeStatus.Setting.MaxFeaturesSelect = (int)numericUpDown_MaxFeaturesSelect.Value;
         }
 
         private void button_SettingDefault_Click(object sender, EventArgs e)
         {
-            GlobeStatus.Setting.UpdateCenterSnap(true);
-            GlobeStatus.Setting.UpdateSelectMode(EnumSelectMode.MostNearOne);
-            GlobeStatus.Setting.UpdatePixelRadiusChangeLimit(1);
-            GlobeStatus.Setting.UpdatePixelMaxRadius(200);
-            GlobeStatus.Setting.UpdateMaxFeaturesSelect(20);
+            GlobeStatus.Setting.CenterSnap = DefaultToolSetting.CenterSnap;
+            GlobeStatus.Setting.KeySnapSwitch = DefaultToolSetting.KeySnapSwitch;
+            GlobeStatus.Setting.PixelSnap = DefaultToolSetting.PixelSnap;
+            GlobeStatus.Setting.SelectMode = DefaultToolSetting.SelectMode;
+            GlobeStatus.Setting.PixelRadiusChangeLimit = DefaultToolSetting.PixelRadiusChangeLimit;
+            GlobeStatus.Setting.PixelMaxRadius = DefaultToolSetting.PixelMaxRadius;
+            GlobeStatus.Setting.MaxFeaturesSelect = DefaultToolSetting.MaxFeaturesSelect;
+            
             SettingTapControlWhenFormStart();
         }
     }

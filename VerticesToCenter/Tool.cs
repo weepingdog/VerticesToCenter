@@ -18,6 +18,8 @@ namespace VerticesToCenter
         private bool m_isMouseDown = false;
         private IPoint m_PointCentre;
         private IPoint m_PointMouseMoveTo;
+
+        private bool m_IsSnapKeyDown=false;
         
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
 
@@ -28,6 +30,7 @@ namespace VerticesToCenter
         #region "1 System Event"
         public Tool()
         {
+
         }
 
         protected override void OnUpdate()
@@ -49,19 +52,25 @@ namespace VerticesToCenter
 
         #region "2 Mouse Event"
         protected override void OnMouseDown(ESRI.ArcGIS.Desktop.AddIns.Tool.MouseEventArgs arg)
-        {
-            //清空选择集
-            GlobeStatus.Map.ClearSelection();
-            GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
-            //GlobeStatus.ActiveView.Refresh(); 
-
+        {          
             IPoint PointMouseDown = GlobeStatus.ActiveView.ScreenDisplay.DisplayTransformation.ToMapPoint(arg.X, arg.Y);
             if (PointMouseDown == null)
                 return;
 
-            if (GlobeStatus.Setting.CenterSnap) //若开启了圆心捕捉
+            //清空选择集
+            GlobeStatus.Map.ClearSelection();
+            //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeoSelection, null, null);
+            //GlobeStatus.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGeography, null, null);
+            GlobeStatus.ActiveView.Refresh();
+
+            if (GlobeStatus.Setting.CenterSnap && m_IsSnapKeyDown)//若开启了圆心捕捉，且按下了(自定义)捕捉开关键
             {
-                m_PointCentre = PointSnapWhenMouseDown(PointMouseDown, GlobeStatus.Setting.PixelRadiusChangeLimit);
+                double radiusSnap = 2 * GlobeStatus.Setting.PixelRadiusChangeLimit * GlobeStatus.MapUnit;
+                IPoint pointSnap = PointSnapWhenMouseDown(GlobeStatus.ActiveView, esriGeometryHitPartType.esriGeometryPartVertex, PointMouseDown, GlobeStatus.Setting.PixelRadiusChangeLimit);
+                if (pointSnap != null)
+                    m_PointCentre = pointSnap;
+                else
+                    m_PointCentre = PointMouseDown;
             }
             else
             {
@@ -99,8 +108,17 @@ namespace VerticesToCenter
 
             if (!m_isMouseDown) //鼠标未按下无仅提示捕捉圆心点(在开启捕捉情况下)
             {
-                if (GlobeStatus.Setting.CenterSnap)
-                    PointSnapWhenMouseMove();
+                if (GlobeStatus.Setting.CenterSnap && m_IsSnapKeyDown)
+                {
+                    double radiusSnap = 2 * GlobeStatus.Setting.PixelRadiusChangeLimit * GlobeStatus.MapUnit;
+                    IPoint pointSnap = PointSnapWhenMouseMove(GlobeStatus.ActiveView, esriGeometryHitPartType.esriGeometryPartVertex, m_PointMouseMoveTo, 5);
+
+                    if (pointSnap != null)
+                    {
+                        //画一个捕捉点
+                        //如果不使用AxMapControl
+                    }
+                }
                 return; 
             }
             
@@ -237,14 +255,31 @@ namespace VerticesToCenter
         }
         #endregion
 
-        private IPoint PointSnapWhenMouseDown(IPoint pointCenter,int pixels)
-        {
-            IPoint PointSnap = pointCenter;
-            return PointSnap;
-        }
-        private void PointSnapWhenMouseMove()
+        private IPoint PointSnapWhenMouseDown(IActiveView activeView, esriGeometryHitPartType geometryHitPartType, IPoint pointCenter, double radiusSnap)
         {
 
+            IPoint PointSnap = FunctionCommon.Snapping(activeView, geometryHitPartType, pointCenter, radiusSnap);
+            return PointSnap;
+        }
+        private IPoint PointSnapWhenMouseMove(IActiveView activeView, esriGeometryHitPartType geometryHitPartType, IPoint pointMoveTo, double radiusSnap)
+        {
+            IPoint PointSnap = FunctionCommon.Snapping(activeView, geometryHitPartType, pointMoveTo, radiusSnap);
+            return PointSnap;
+        }
+
+        protected override void OnKeyDown(ESRI.ArcGIS.Desktop.AddIns.Tool.KeyEventArgs arg)
+        {
+            Keys currendKeyDown = arg.KeyCode;
+            if (currendKeyDown == GlobeStatus.Setting.KeySnapSwitch)
+                m_IsSnapKeyDown = true;
+            
+        }
+
+        protected override void OnKeyUp(ESRI.ArcGIS.Desktop.AddIns.Tool.KeyEventArgs arg)
+        {
+            Keys currendKeyUp = arg.KeyCode;
+            if (currendKeyUp == GlobeStatus.Setting.KeySnapSwitch)
+                m_IsSnapKeyDown = false;
         }
     }
 }
