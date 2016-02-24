@@ -17,7 +17,7 @@ VerticesToCenter</Description>
         <Button id="SMGI_VerticesToCenter_ButtonOption" class="ButtonOption" message="打开选项对话框." caption="选项" tip="节点到圆心选项" category="节点到圆心" image="Images\ButtonOption.png" onDemand="false">
           <Help heading="OptionVerticesToCenter">ButtonOption</Help>
         </Button>
-        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="按圆选择要素，将所选要素符合条件节点移动到圆心." caption="节点到圆心" tip="节点到圆心" category="节点到圆心" image="Images\Tool.png" onDemand="false">
+        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="按圆选择要素，将所选要素符合条件节点移动到圆心. 若按下捕捉切换键，当鼠标按下时，会尝试将圆心捕捉到可见要素的一个节点上，捕捉成果后，会显示一个节点方框" caption="节点到圆心" tip="节点到圆心" category="节点到圆心" image="Images\Tool.png" onDemand="false">
           <Help heading="ToolVerticesToCenter">Tool</Help>
         </Tool>
         <Button id="SMGI_VerticesToCenter_ButtonUndo" class="ButtonUndo" message="撤销节点编辑操作(一次多个点)." caption="撤销" tip="撤销" category="节点到圆心" image="Images\ButtonUndo.png" onDemand="false">
