@@ -110,7 +110,11 @@
       <DependentUpon>FormOption.cs</DependentUpon>
     </Compile>
     <Compile Include="FunctionCommon.cs" />
+    <Compile Include="FunctionCommonFeatureManage.cs" />
+    <Compile Include="FunctionCommonGeometry.cs" />
     <Compile Include="GlobeStatus.cs" />
+    <Compile Include="GlobeStatusForTool.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="PolyLines.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -179,7 +183,9 @@
     <AddInContent Include="Images\ButtonRedo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AddInContent Include="Config.zh-CN.xml" />
+    <AddInContent Include="Config.zh-CN.xml">
+      <SubType>Designer</SubType>
+    </AddInContent>
   </ItemGroup>
   <PropertyGroup>
     <ZipFileExtension>esriAddIn</ZipFileExtension>
