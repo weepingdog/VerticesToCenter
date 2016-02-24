@@ -32,7 +32,7 @@ namespace VerticesToCenter
                 GlobeStatus.EditablePolyLines.Clear();
                 IList<IFeatureLayer> FeatureLayerList = FunctionCommon.GetEditablePolyLines(GlobeStatus.Map);
                 GlobeStatus.EditablePolyLines.UpdateFeatureLayerList(FeatureLayerList);
-                GlobeStatus.UpdateLastPathName(CurrentPathName);
+                GlobeStatus.LastPathName = CurrentPathName;
             }
             //GlobeStatus.WorkspaceEdit.EnableUndoRedo();
             GlobeStatus.WorkspaceEdit.StartEditing(false);

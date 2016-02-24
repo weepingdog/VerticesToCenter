@@ -124,13 +124,13 @@ namespace VerticesToCenter
 
         private void button_SettingDefault_Click(object sender, EventArgs e)
         {
-            GlobeStatus.Setting.CenterSnap = DefaultToolSetting.CenterSnap;
-            GlobeStatus.Setting.KeySnapSwitch = DefaultToolSetting.KeySnapSwitch;
-            GlobeStatus.Setting.PixelSnap = DefaultToolSetting.PixelSnap;
-            GlobeStatus.Setting.SelectMode = DefaultToolSetting.SelectMode;
-            GlobeStatus.Setting.PixelRadiusChangeLimit = DefaultToolSetting.PixelRadiusChangeLimit;
-            GlobeStatus.Setting.PixelMaxRadius = DefaultToolSetting.PixelMaxRadius;
-            GlobeStatus.Setting.MaxFeaturesSelect = DefaultToolSetting.MaxFeaturesSelect;
+            GlobeStatus.Setting.CenterSnap = DefaultVerticesToCenterSetting.CenterSnap;
+            GlobeStatus.Setting.KeySnapSwitch = DefaultVerticesToCenterSetting.KeySnapSwitch;
+            GlobeStatus.Setting.PixelSnap = DefaultVerticesToCenterSetting.PixelSnap;
+            GlobeStatus.Setting.SelectMode = DefaultVerticesToCenterSetting.SelectMode;
+            GlobeStatus.Setting.PixelRadiusChangeLimit = DefaultVerticesToCenterSetting.PixelRadiusChangeLimit;
+            GlobeStatus.Setting.PixelMaxRadius = DefaultVerticesToCenterSetting.PixelMaxRadius;
+            GlobeStatus.Setting.MaxFeaturesSelect = DefaultVerticesToCenterSetting.MaxFeaturesSelect;
             
             SettingTapControlWhenFormStart();
         }
