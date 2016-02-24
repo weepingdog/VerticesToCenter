@@ -17,7 +17,7 @@ VerticesToCenter</Description>
         <Button id="SMGI_VerticesToCenter_ButtonOption" class="ButtonOption" message="Open the OptionFrom to make Settings." caption="Option VerticesToCenter" tip="Option.&#xD;&#xA;VerticesToCenter" category="Add-In Controls" image="Images\ButtonOption.png" onDemand="false">
           <Help heading="OptionVerticesToCenter">ButtonOption</Help>
         </Button>
-        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="Set specified vertexes of features selected  by a circle which in range of the circle to the center." caption="Tool VerticesToCenter" tip="Tool.&#xD;&#xA;VerticesToCenter" category="Add-In Controls" image="Images\Tool.png" onDemand="false">
+        <Tool id="SMGI_VerticesToCenter_Tool" class="Tool" message="Set specified vertexes of features selected  by a circle which in range of the circle to the center.&#xD;&#xA;When KeySnapSwitch is down,button down opertation will start snapping to a vertice of a feature visiable in the  map. If Snapping succeeds, a retangle will show at the vertice" caption="Tool VerticesToCenter" tip="Tool.&#xD;&#xA;VerticesToCenter" category="Add-In Controls" image="Images\Tool.png" onDemand="false">
           <Help heading="ToolVerticesToCenter">Tool</Help>
         </Tool>
         <Button id="SMGI_VerticesToCenter_ButtonUndo" class="ButtonUndo" message="Undo vertexes editting operations." caption="Undo VerticesToCenter" tip="Undo." category="Add-In Controls" image="Images\ButtonUndo.png" onDemand="false">
