@@ -21,7 +21,7 @@ namespace VerticesToCenter
 
         private IPoint m_PointLastSnapWhenMove = null;
 
-        private bool m_IsSnapKeyDown=false;
+        private bool m_IsSnapKeyDown = false;
         
         private INewCircleFeedback m_CircleFeedback;    //3 跟踪圆
 
