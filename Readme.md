@@ -1,15 +1,27 @@
-1 get layername function
-    public static string GetLayerNameFromFeature(IFeature feature)
-    return feature.Class.AliasName; //some bugs
+VerticesToCenter帮助
+===
+这是一个ArcGIS Desktop Add-in插件项目，项目中文名“节点到圆心”，提供了方便的悬挂点处理功能。本插件支持ArcGIS10.1，其他版本未做测试。
+本项目包含1工具条、3个按钮、1个工具。
 
-2 public static void RemovePointMarker(IMap map)
-    graphicsContainer.DeleteAllElements(); //may has bugs
+![](http://imgchr.com/images/2016-04-19_194403.jpg)
 
-3 tool undo/redo and mainframe's undo/redo
+使用步骤
+---
+    1. 在工具条正常加载后，添加需要处理的线层，并开始编辑。
+    2. 点击工具条“选项”，进行工具设置。
+    3. 点击“工具”，在图形界面按下鼠标拖曳，会出现一个圆追踪界面，释放鼠标，被追踪圆覆盖的线层端点会被设置到圆心位置。
+        ![](http://imgchr.com/images/2016-04-19_195849.jpg)
+        ![](http://imgchr.com/images/2016-04-19_200135.jpg)
+        ![](http://imgchr.com/images/2016-04-19_200504.jpg)
+    4. 本工具提供了更高级的撤销、重做功能。
+    5. 按下Ctrl键(或其他设置键)，可圆心开启捕捉。
 
-============
-function to be added
-1 show infomation in statusbar 
-2 show snap tips
-3 edit icons
-
+选项说明
+---
+    ![](http://imgchr.com/images/2016-04-19_200823.jpg)
+    1.“编辑图层选择”选项卡可以控制被本工具修改的线图层。
+    2. 可以开启工具捕捉（与ArcMap自身捕捉功能相对独立），并设置捕捉键。
+    3. 可以设置捕捉像素容差。
+    4. 选择模式包括最近点、首点、末点、双端点四个选项，用于控制工具处理的端点类型。
+    5. 圆心距变化阈值用于减小图面刷新次数。
+    6. 最大圆心距和要素上限用于控制被处理对象的个数。
